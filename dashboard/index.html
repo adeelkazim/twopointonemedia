@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Two Point One Media</title>
+  <meta name="description" content="Secure access link for the Two Point One Media Hermes agent dashboard.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="icon" href="../assets/67d9890b__Arrow_Dark.svg" type="image/svg+xml">
+  <style>
+    .dashboard-gate {
+      min-height: 100vh;
+      background: var(--color-dark);
+      color: var(--color-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 24px 80px;
+    }
+    .dashboard-card {
+      width: min(760px, 100%);
+      border: 1px solid rgba(242, 242, 242, 0.18);
+      border-radius: 32px;
+      padding: clamp(32px, 6vw, 64px);
+      background: rgba(242, 242, 242, 0.05);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+    }
+    .dashboard-card .eyebrow {
+      color: var(--color-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.78rem;
+      margin-bottom: 18px;
+      display: block;
+    }
+    .dashboard-card h1 {
+      font-size: clamp(2.8rem, 8vw, 6.5rem);
+      line-height: 0.9;
+      margin: 0 0 24px;
+      color: var(--color-light);
+    }
+    .dashboard-card p {
+      color: rgba(242, 242, 242, 0.78);
+      font-size: 1.08rem;
+      line-height: 1.7;
+      max-width: 620px;
+    }
+    .dashboard-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 34px;
+    }
+    .dashboard-note {
+      margin-top: 28px;
+      font-size: 0.92rem;
+      color: rgba(242, 242, 242, 0.55);
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container">
+      <a href="../index.html" class="nav-logo" aria-label="Two Point One Media home">
+        <img src="../assets/67dafbf0__ICON_SVG.svg" alt="Two Point One Media" width="23" height="44">
+      </a>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../about.html">About</a>
+        <a href="../projects.html">Services</a>
+        <a href="../blog.html">Blog</a>
+        <a href="../contact.html">Contact</a>
+      </div>
+      <button class="menu-button" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="fullscreen-menu" role="navigation" aria-label="Mobile menu">
+    <a href="../index.html">Home</a>
+    <a href="../about.html">About</a>
+    <a href="../projects.html">Services</a>
+    <a href="../blog.html">Blog</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+
+  <main class="dashboard-gate">
+    <section class="dashboard-card reveal" aria-labelledby="dashboard-title">
+      <span class="eyebrow">Private operations</span>
+      <h1 id="dashboard-title">Agent Dashboard</h1>
+      <p>
+        This page is a safe handoff to the authenticated Hermes dashboard. The marketing site does not
+        host agent controls directly; secure access remains on the Hermes server.
+      </p>
+      <div class="dashboard-actions">
+        <a class="btn-pill" href="https://hermes-agent-lizs.srv1972645.hstgr.cloud" rel="noopener">Open Dashboard</a>
+        <a class="btn-pill" href="../index.html">Back to Site</a>
+      </div>
+      <p class="dashboard-note">
+        If you are not AK, this page is not for you. Dashboard access requires the separate Hermes login.
+      </p>
+    </section>
+  </main>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
