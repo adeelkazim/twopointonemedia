@@ -14,7 +14,7 @@
     .status{display:inline-flex;gap:8px;align-items:center;border:1px solid rgba(79,209,197,.35);background:rgba(79,209,197,.08);color:#bbfff8;padding:8px 10px;text-transform:uppercase;font-size:12px;font-weight:900;letter-spacing:.08em}
     .dot{width:8px;height:8px;border-radius:99px;background:#4fd1c5}
     h2{font-size:20px;margin:0 0 10px;letter-spacing:-.02em}.muted{color:#aeb8c8}ul{margin:8px 0 0;padding-left:20px}li{margin:8px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:720px){.grid{grid-template-columns:1fr}}
-    code{background:#191f2b;border:1px solid rgba(255,255,255,.1);padding:2px 5px}.small{font-size:13px;color:#95a1b3}
+    code{background:#191f2b;border:1px solid rgba(255,255,255,.1);padding:2px 5px}.small{font-size:13px;color:#95a1b3}a{color:#9bd2ff}
   </style>
 </head>
 <body>
@@ -25,7 +25,7 @@
 
     <section class="card">
       <h2>Current status</h2>
-      <p class="muted">Iris has started Phase 0. Latest board heartbeat says: spec read, provider docs fetched, Open-Higgsfield source extracted for evaluation and checks.</p>
+      <p class="muted">[2026-10-01 06:41] [run 16] heartbeat</p>
     </section>
 
     <section class="grid">
@@ -33,9 +33,9 @@
         <h2>Task</h2>
         <ul>
           <li><strong>ID:</strong> <code>t_a6a09e8e</code></li>
-          <li><strong>Assignee:</strong> Iris</li>
-          <li><strong>Status:</strong> Running</li>
-          <li><strong>Workspace:</strong> <code>/opt/data/workspace/adeel-video-studio</code></li>
+          <li><strong>Assignee:</strong> iris</li>
+          <li><strong>Status:</strong> running</li>
+          <li><strong>Workspace:</strong> <code>dir @ /opt/data/workspace/adeel-video-studio</code></li>
         </ul>
       </div>
       <div class="card">
@@ -51,6 +51,11 @@
     </section>
 
     <section class="card">
+      <h2>Progress file snapshot</h2>
+      <ul><li># Adeel Video Studio progress</li><li>Workspace: `/opt/data/workspace/adeel-video-studio`</li><li>Task: `t_a6a09e8e`</li><li>Started: 2026-10-01 UTC</li><li>## Current milestone</li><li>Phase 0 — Verification and skeleton.</li><li>## Completed</li><li>- Read the full Higgsfield Clone Spec attachment.</li><li>- Confirmed workspace path and initialized directories: `docs/`, `candidates/`, `apps/`, `packages/`, `infra/`, `tests/`, `fixtures/`.</li><li>- Created this persistent progress file.</li><li>- Fetched and saved OpenRouter public video model catalog to `docs/openrouter-video-models-public.json`.</li><li>- Wrote `docs/provider-verification.md` with initial OpenRouter, MiniMax direct, and fal Seedance verification findings and sources.</li></ul>
+    </section>
+
+    <section class="card">
       <h2>Important guardrails</h2>
       <ul>
         <li>No paid API calls until AK configures budget and keys.</li>
@@ -59,7 +64,7 @@
       </ul>
     </section>
 
-    <p class="small">Static unlisted status page. It contains no secrets and no credentials. Last generated: 2026-10-01 06:34 UTC.</p>
+    <p class="small">Static unlisted status page. It contains no secrets and no credentials. Last generated: 2026-10-01 06:42 UTC. URL: <a href="https://adeelkazim.github.io/twopointonemedia/status/adeel-video-studio/">https://adeelkazim.github.io/twopointonemedia/status/adeel-video-studio/</a></p>
   </main>
 </body>
 </html>
