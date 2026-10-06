@@ -1149,7 +1149,8 @@ ul, ol {
 
 .article-embed-tiktok .tiktok-frame {
   width: min(100%, 325px);
-  height: 760px;
+  aspect-ratio: 9 / 16;
+  height: auto;
   border: 0;
   border-radius: 10px;
   background: #000;
