@@ -1141,6 +1141,16 @@ ul, ol {
   opacity: 0.8;
 }
 
+.article-embed {
+  margin: 44px auto;
+  display: flex;
+  justify-content: center;
+}
+
+.article-embed-tiktok .tiktok-embed {
+  margin: 0 auto !important;
+}
+
 .article-gallery {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
