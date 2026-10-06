@@ -1147,8 +1147,12 @@ ul, ol {
   justify-content: center;
 }
 
-.article-embed-tiktok .tiktok-embed {
-  margin: 0 auto !important;
+.article-embed-tiktok .tiktok-frame {
+  width: min(100%, 325px);
+  height: 760px;
+  border: 0;
+  border-radius: 10px;
+  background: #000;
 }
 
 .article-gallery {
