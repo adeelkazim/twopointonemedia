@@ -1401,6 +1401,13 @@ ul, ol {
   margin-bottom: 50px;
 }
 
+.footer-wordmark img {
+  display: block;
+  width: min(520px, 86vw);
+  height: auto;
+  margin: 0 auto;
+}
+
 .footer-wordmark span {
   font-family: var(--font-heading);
   font-size: 64px;
@@ -1441,6 +1448,18 @@ ul, ol {
   width: 20px;
   height: 20px;
   color: var(--color-light);
+}
+
+.footer-social a img {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(1);
+  opacity: 1;
+}
+
+.footer-social a svg,
+.footer-social a svg path {
+  fill: currentColor;
 }
 
 .footer-bottom {
@@ -1689,12 +1708,12 @@ ul, ol {
     font-size: 28px;
   }
 
-  .footer-wordmark span:first-child {
-    font-size: 64px;
+  .footer-wordmark {
+    margin-bottom: 34px;
   }
 
-  .footer-wordmark span:last-child {
-    font-size: 48px;
+  .footer-wordmark img {
+    width: min(320px, 82vw);
   }
 
   .page-404 h1 {
