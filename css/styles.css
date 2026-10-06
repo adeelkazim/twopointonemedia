@@ -1157,9 +1157,11 @@ ul, ol {
 }
 
 .article-embed-instagram .instagram-frame {
-  width: min(100%, 325px);
+  display: block;
+  width: min(100%, 325px) !important;
   aspect-ratio: 9 / 16;
-  height: auto;
+  height: 578px !important;
+  max-height: 578px;
   border: 0;
   border-radius: 10px;
   background: #000;
