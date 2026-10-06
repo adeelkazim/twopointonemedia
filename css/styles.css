@@ -845,7 +845,24 @@ ul, ol {
   margin-bottom: 12px;
 }
 
+.project-hero-media {
+  width: 100%;
+  margin-top: 32px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.05);
+}
+
+.project-hero-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .project-detail-eyebrow {
+  display: block;
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -1536,12 +1553,110 @@ ul, ol {
     font-size: 17px;
   }
 
+  .about-hero {
+    padding-top: calc(var(--nav-height) + 36px);
+    padding-bottom: 42px;
+  }
+
+  .about-hero h1 {
+    font-size: 28px;
+    letter-spacing: 5px;
+    line-height: 1.2;
+  }
+
+  .about-hero p {
+    font-size: 17px;
+    line-height: 1.55;
+  }
+
+  .service-panel,
+  .service-panel:nth-child(even) {
+    min-height: auto;
+    margin-bottom: 28px;
+  }
+
+  .service-media {
+    flex: none;
+    width: 100%;
+    height: 240px;
+    min-height: 0;
+  }
+
   .service-panel-bg {
-    padding: 30px;
+    min-height: auto;
+    padding: 30px 26px 34px;
   }
 
   .service-panel-bg h2 {
-    font-size: 24px;
+    font-size: 26px;
+    line-height: 1.15;
+  }
+
+  .service-panel-bg p {
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+
+  .project-detail-hero {
+    padding-top: calc(var(--nav-height) + 28px);
+    padding-bottom: 22px;
+  }
+
+  .btn-back {
+    margin-bottom: 14px;
+    font-size: 12px;
+    letter-spacing: 0.8px;
+  }
+
+  .project-detail-eyebrow {
+    margin-bottom: 14px;
+    font-size: 12px;
+    letter-spacing: 2.5px;
+  }
+
+  .project-hero-media {
+    margin-top: 22px;
+    border-radius: 12px;
+  }
+
+  .project-section {
+    padding: 24px 0;
+  }
+
+  .project-section h2 {
+    font-size: 30px;
+    margin-bottom: 18px;
+  }
+
+  .project-section > p {
+    font-size: 16px;
+    line-height: 1.55;
+    margin-bottom: 20px;
+  }
+
+  .process-steps {
+    gap: 16px;
+  }
+
+  .process-step {
+    gap: 16px;
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .step-number {
+    font-size: 34px;
+    min-width: 38px;
+  }
+
+  .step-content h3 {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .step-content p {
+    font-size: 16px;
+    line-height: 1.55;
   }
 
   .marquee-text {
