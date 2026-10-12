@@ -1390,36 +1390,17 @@ ul, ol {
 /* ============================================
    FOOTER
    ============================================ */
+.contact-logo {
+  display: block;
+  width: min(220px, 58vw);
+  height: auto;
+  margin: 0 auto 28px;
+}
+
 .footer {
   background-color: var(--color-dark);
   border-top: 1px solid rgba(255,255,255,0.1);
-  padding: 80px 0 40px;
-}
-
-.footer-wordmark {
-  text-align: center;
-  margin-bottom: 50px;
-}
-
-.footer-wordmark img {
-  display: block;
-  width: min(520px, 86vw);
-  height: auto;
-  margin: 0 auto;
-}
-
-.footer-wordmark span {
-  font-family: var(--font-heading);
-  font-size: 64px;
-  font-weight: 900;
-  line-height: 1;
-  display: block;
-  color: var(--color-light);
-  opacity: 0.15;
-}
-
-.footer-wordmark span:first-child {
-  font-size: 96px;
+  padding: 34px 0 34px;
 }
 
 .footer-social {
@@ -1708,12 +1689,9 @@ ul, ol {
     font-size: 28px;
   }
 
-  .footer-wordmark {
-    margin-bottom: 34px;
-  }
-
-  .footer-wordmark img {
-    width: min(320px, 82vw);
+  .contact-logo {
+    width: min(190px, 54vw);
+    margin-bottom: 22px;
   }
 
   .page-404 h1 {
