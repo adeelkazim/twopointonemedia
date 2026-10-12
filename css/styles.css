@@ -810,10 +810,11 @@ ul, ol {
 }
 
 .capability-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  padding: 30px 0;
+  display: grid;
+  grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
+  align-items: start;
+  column-gap: clamp(48px, 7vw, 96px);
+  padding: 34px 0;
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
@@ -821,13 +822,17 @@ ul, ol {
   font-family: var(--font-heading);
   font-size: 22px;
   font-weight: 700;
-  min-width: 220px;
+  line-height: 1.35;
+  max-width: 320px;
+  margin: 0;
 }
 
 .capability-item p {
   font-size: 16px;
-  line-height: 1.7;
+  line-height: 1.75;
   opacity: 0.85;
+  max-width: 780px;
+  margin: 0;
 }
 
 /* ============================================
@@ -1673,12 +1678,13 @@ ul, ol {
   }
 
   .capability-item {
-    flex-direction: column;
-    gap: 8px;
+    grid-template-columns: 1fr;
+    row-gap: 10px;
+    padding: 26px 0;
   }
 
   .capability-item h3 {
-    min-width: auto;
+    max-width: none;
   }
 
   .about-hero h1,
