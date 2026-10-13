@@ -614,6 +614,110 @@
       background: white;
     }
 
+
+    .gallery-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin: 0 0 18px;
+    }
+    .gallery-filters {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .gallery-filter {
+      min-height: 38px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(51,214,255,.25);
+      background: rgba(255,255,255,.035);
+      color: var(--muted);
+      cursor: pointer;
+      font-weight: 850;
+    }
+    .gallery-filter.active {
+      color: white;
+      border-color: rgba(51,214,255,.55);
+      background: rgba(51,214,255,.16);
+    }
+    .gallery-count {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .photo-gallery-grid.enhanced {
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 10px;
+      align-items: start;
+    }
+    .photo-card[data-group="ai"] span::before { content: "AI · "; color: var(--cyan); }
+    .photo-lightbox {
+      z-index: 95;
+    }
+    .lightbox-frame.enhanced {
+      width: min(1180px, 100%);
+      max-height: calc(100vh - 36px);
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      gap: 12px;
+    }
+    .lightbox-main {
+      position: relative;
+      min-height: 0;
+      display: grid;
+      place-items: center;
+    }
+    .lightbox-main img {
+      max-height: 72vh;
+    }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18);
+      color: white;
+      background: rgba(0,0,0,.38);
+      cursor: pointer;
+      font-size: 34px;
+      display: grid;
+      place-items: center;
+    }
+    .lightbox-nav.prev { left: 12px; }
+    .lightbox-nav.next { right: 12px; }
+    .lightbox-meta {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 4px;
+    }
+    .lightbox-filmstrip {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 4px 2px 8px;
+      scrollbar-width: thin;
+    }
+    .filmstrip-thumb {
+      flex: 0 0 78px;
+      width: 78px;
+      height: 54px;
+      border: 2px solid transparent;
+      border-radius: 10px;
+      padding: 0;
+      overflow: hidden;
+      background: rgba(255,255,255,.06);
+      cursor: pointer;
+    }
+    .filmstrip-thumb.active { border-color: var(--cyan); }
+    .filmstrip-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
     .status-card {
       position: relative;
       border: 1px solid var(--line);
@@ -823,6 +927,110 @@
       .partner-lockup { margin-bottom: 30px; width: min(158px, 33vw); }
       header nav { display: none; }
       .hero { padding-bottom: 52px; }
+
+    .gallery-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin: 0 0 18px;
+    }
+    .gallery-filters {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .gallery-filter {
+      min-height: 38px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(51,214,255,.25);
+      background: rgba(255,255,255,.035);
+      color: var(--muted);
+      cursor: pointer;
+      font-weight: 850;
+    }
+    .gallery-filter.active {
+      color: white;
+      border-color: rgba(51,214,255,.55);
+      background: rgba(51,214,255,.16);
+    }
+    .gallery-count {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .photo-gallery-grid.enhanced {
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 10px;
+      align-items: start;
+    }
+    .photo-card[data-group="ai"] span::before { content: "AI · "; color: var(--cyan); }
+    .photo-lightbox {
+      z-index: 95;
+    }
+    .lightbox-frame.enhanced {
+      width: min(1180px, 100%);
+      max-height: calc(100vh - 36px);
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      gap: 12px;
+    }
+    .lightbox-main {
+      position: relative;
+      min-height: 0;
+      display: grid;
+      place-items: center;
+    }
+    .lightbox-main img {
+      max-height: 72vh;
+    }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18);
+      color: white;
+      background: rgba(0,0,0,.38);
+      cursor: pointer;
+      font-size: 34px;
+      display: grid;
+      place-items: center;
+    }
+    .lightbox-nav.prev { left: 12px; }
+    .lightbox-nav.next { right: 12px; }
+    .lightbox-meta {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 4px;
+    }
+    .lightbox-filmstrip {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 4px 2px 8px;
+      scrollbar-width: thin;
+    }
+    .filmstrip-thumb {
+      flex: 0 0 78px;
+      width: 78px;
+      height: 54px;
+      border: 2px solid transparent;
+      border-radius: 10px;
+      padding: 0;
+      overflow: hidden;
+      background: rgba(255,255,255,.06);
+      cursor: pointer;
+    }
+    .filmstrip-thumb.active { border-color: var(--cyan); }
+    .filmstrip-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
     .status-card { max-width: 520px; }
       .section-title { display: block; }
       .section-title p { margin-top: 12px; }
@@ -846,6 +1054,13 @@
       .section-body { padding: 0 12px 14px; }
       .video-item-body { padding: 8px; }
       .photo-gallery-grid { gap: 8px; }
+      .gallery-toolbar { align-items: flex-start; }
+      .photo-gallery-grid.enhanced { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .lightbox-frame.enhanced { max-height: calc(100vh - 24px); }
+      .lightbox-main img { max-height: 58vh; }
+      .lightbox-nav { width: 40px; height: 40px; font-size: 28px; }
+      .filmstrip-thumb { flex-basis: 62px; width: 62px; height: 44px; }
+
       .photo-card { border-radius: 14px; }
       .photo-lightbox, .pdf-modal { padding: 12px; }
       .lightbox-bar { align-items: flex-start; }
@@ -951,47 +1166,18 @@
           </summary>
           <div class="section-body">
             <div class="photo-gallery-intro">
-              <p>Selected and lightly graded from the HP Hackathon Photos folder. Tap any image to open a larger viewer, then use previous/next to move through the set.</p>
-              <span class="photo-count-badge">9 selected photos</span>
+              <p>Browse the selected event photos and the newly added AI Images from Drive. Use the filters below, then tap any image to open the full gallery viewer.</p>
+              <span class="photo-count-badge">21 photos</span>
             </div>
-            <div class="photo-gallery-grid" aria-label="Selected HP Hackathon event photos">
-              <button class="photo-card" type="button" data-photo-index="0">
-                <img src="assets/event-photos/thumbs/01_IMG_0356.jpg" alt="Opening group moment" width="720" height="540" loading="lazy" />
-                <span>01</span>
-              </button>
-              <button class="photo-card" type="button" data-photo-index="1">
-                <img src="assets/event-photos/thumbs/02_IMG_0366.jpg" alt="Full audience group photo" width="720" height="540" loading="lazy" />
-                <span>02</span>
-              </button>
-              <button class="photo-card" type="button" data-photo-index="2">
-                <img src="assets/event-photos/thumbs/03_IMG_0371.jpg" alt="Celebration group photo" width="720" height="540" loading="lazy" />
-                <span>03</span>
-              </button>
-              <button class="photo-card" type="button" data-photo-index="3">
-                <img src="assets/event-photos/thumbs/04_IMG_0394.jpg" alt="Finalists and HP team" width="720" height="540" loading="lazy" />
-                <span>04</span>
-              </button>
-              <button class="photo-card" type="button" data-photo-index="4">
-                <img src="assets/event-photos/thumbs/05_IMG_0398.jpg" alt="Awards group portrait" width="720" height="540" loading="lazy" />
-                <span>05</span>
-              </button>
-              <button class="photo-card" type="button" data-photo-index="5">
-                <img src="assets/event-photos/thumbs/06_IMG_0400.jpg" alt="Stage group portrait" width="720" height="540" loading="lazy" />
-                <span>06</span>
-              </button>
-              <button class="photo-card" type="button" data-photo-index="6">
-                <img src="assets/event-photos/thumbs/07_IMG_9903.jpg" alt="Winners on stage" width="720" height="540" loading="lazy" />
-                <span>07</span>
-              </button>
-              <button class="photo-card" type="button" data-photo-index="7">
-                <img src="assets/event-photos/thumbs/08_IMG_9906.jpg" alt="Team award presentation" width="720" height="540" loading="lazy" />
-                <span>08</span>
-              </button>
-              <button class="photo-card" type="button" data-photo-index="8">
-                <img src="assets/event-photos/thumbs/09_IMG_9913.jpg" alt="Team portrait" width="720" height="540" loading="lazy" />
-                <span>09</span>
-              </button>
+            <div class="gallery-toolbar" aria-label="Photo gallery controls">
+              <div class="gallery-filters" role="group" aria-label="Filter photos">
+                <button class="gallery-filter active" type="button" data-gallery-filter="all">All</button>
+                <button class="gallery-filter" type="button" data-gallery-filter="event">Event Photos</button>
+                <button class="gallery-filter" type="button" data-gallery-filter="ai">AI Images</button>
+              </div>
+              <span class="gallery-count" id="gallery-count">21 photos</span>
             </div>
+            <div class="photo-gallery-grid enhanced" id="photo-gallery-grid" aria-label="Selected HP Hackathon event and AI images"></div>
           </div>
         </details>
 
@@ -1052,19 +1238,24 @@
     </div>
 
     <div class="photo-lightbox" id="photo-lightbox" aria-hidden="true" role="dialog" aria-label="Event photo viewer">
-      <div class="lightbox-frame">
-        <img id="lightbox-image" src="" alt="" />
+      <div class="lightbox-frame enhanced">
         <div class="lightbox-bar">
           <div>
             <div class="lightbox-title" id="lightbox-title"></div>
+            <div class="lightbox-meta" id="lightbox-meta"></div>
             <div id="lightbox-count"></div>
           </div>
           <div class="lightbox-controls">
-            <button type="button" id="lightbox-prev" aria-label="Previous photo">‹</button>
-            <button type="button" id="lightbox-next" aria-label="Next photo">›</button>
+            <a class="drive-link" id="lightbox-open" href="#" target="_blank" rel="noopener noreferrer">Open image</a>
             <button type="button" id="lightbox-close" aria-label="Close photo viewer">×</button>
           </div>
         </div>
+        <div class="lightbox-main">
+          <button type="button" class="lightbox-nav prev" id="lightbox-prev" aria-label="Previous photo">‹</button>
+          <img id="lightbox-image" src="" alt="" />
+          <button type="button" class="lightbox-nav next" id="lightbox-next" aria-label="Next photo">›</button>
+        </div>
+        <div class="lightbox-filmstrip" id="lightbox-filmstrip" aria-label="Photo thumbnails"></div>
       </div>
     </div>
 
@@ -1121,59 +1312,241 @@
     const eventPhotos = [
       {
             "title": "Opening group moment",
-            "src": "assets/event-photos/web/01_IMG_0356.jpg"
+            "group": "Event Photos",
+            "category": "event",
+            "src": "assets/event-photos/web/01_IMG_0356.jpg",
+            "thumb": "assets/event-photos/thumbs/01_IMG_0356.jpg"
       },
       {
             "title": "Full audience group photo",
-            "src": "assets/event-photos/web/02_IMG_0366.jpg"
+            "group": "Event Photos",
+            "category": "event",
+            "src": "assets/event-photos/web/02_IMG_0366.jpg",
+            "thumb": "assets/event-photos/thumbs/02_IMG_0366.jpg"
       },
       {
             "title": "Celebration group photo",
-            "src": "assets/event-photos/web/03_IMG_0371.jpg"
+            "group": "Event Photos",
+            "category": "event",
+            "src": "assets/event-photos/web/03_IMG_0371.jpg",
+            "thumb": "assets/event-photos/thumbs/03_IMG_0371.jpg"
       },
       {
             "title": "Finalists and HP team",
-            "src": "assets/event-photos/web/04_IMG_0394.jpg"
+            "group": "Event Photos",
+            "category": "event",
+            "src": "assets/event-photos/web/04_IMG_0394.jpg",
+            "thumb": "assets/event-photos/thumbs/04_IMG_0394.jpg"
       },
       {
             "title": "Awards group portrait",
-            "src": "assets/event-photos/web/05_IMG_0398.jpg"
+            "group": "Event Photos",
+            "category": "event",
+            "src": "assets/event-photos/web/05_IMG_0398.jpg",
+            "thumb": "assets/event-photos/thumbs/05_IMG_0398.jpg"
       },
       {
             "title": "Stage group portrait",
-            "src": "assets/event-photos/web/06_IMG_0400.jpg"
+            "group": "Event Photos",
+            "category": "event",
+            "src": "assets/event-photos/web/06_IMG_0400.jpg",
+            "thumb": "assets/event-photos/thumbs/06_IMG_0400.jpg"
       },
       {
             "title": "Winners on stage",
-            "src": "assets/event-photos/web/07_IMG_9903.jpg"
+            "group": "Event Photos",
+            "category": "event",
+            "src": "assets/event-photos/web/07_IMG_9903.jpg",
+            "thumb": "assets/event-photos/thumbs/07_IMG_9903.jpg"
       },
       {
             "title": "Team award presentation",
-            "src": "assets/event-photos/web/08_IMG_9906.jpg"
+            "group": "Event Photos",
+            "category": "event",
+            "src": "assets/event-photos/web/08_IMG_9906.jpg",
+            "thumb": "assets/event-photos/thumbs/08_IMG_9906.jpg"
       },
       {
             "title": "Team portrait",
-            "src": "assets/event-photos/web/09_IMG_9913.jpg"
+            "group": "Event Photos",
+            "category": "event",
+            "src": "assets/event-photos/web/09_IMG_9913.jpg",
+            "thumb": "assets/event-photos/thumbs/09_IMG_9913.jpg"
+      },
+      {
+            "title": "AI Image 01",
+            "group": "AI Images",
+            "category": "ai",
+            "src": "assets/event-photos/ai/web/ai_01_snap-1-edited.jpg",
+            "thumb": "assets/event-photos/ai/thumbs/ai_01_snap-1-edited.jpg"
+      },
+      {
+            "title": "AI Image 02",
+            "group": "AI Images",
+            "category": "ai",
+            "src": "assets/event-photos/ai/web/ai_02_snap-2-edited.jpg",
+            "thumb": "assets/event-photos/ai/thumbs/ai_02_snap-2-edited.jpg"
+      },
+      {
+            "title": "AI Image 03",
+            "group": "AI Images",
+            "category": "ai",
+            "src": "assets/event-photos/ai/web/ai_03_snap-3-edited.jpg",
+            "thumb": "assets/event-photos/ai/thumbs/ai_03_snap-3-edited.jpg"
+      },
+      {
+            "title": "AI Image 04",
+            "group": "AI Images",
+            "category": "ai",
+            "src": "assets/event-photos/ai/web/ai_04_snap-4-edited.jpg",
+            "thumb": "assets/event-photos/ai/thumbs/ai_04_snap-4-edited.jpg"
+      },
+      {
+            "title": "AI Image 05",
+            "group": "AI Images",
+            "category": "ai",
+            "src": "assets/event-photos/ai/web/ai_05_snap-5-edited.jpg",
+            "thumb": "assets/event-photos/ai/thumbs/ai_05_snap-5-edited.jpg"
+      },
+      {
+            "title": "AI Image 06",
+            "group": "AI Images",
+            "category": "ai",
+            "src": "assets/event-photos/ai/web/ai_06_snap-6-edited.jpg",
+            "thumb": "assets/event-photos/ai/thumbs/ai_06_snap-6-edited.jpg"
+      },
+      {
+            "title": "AI Image 07",
+            "group": "AI Images",
+            "category": "ai",
+            "src": "assets/event-photos/ai/web/ai_07_snap-7-edited.jpg",
+            "thumb": "assets/event-photos/ai/thumbs/ai_07_snap-7-edited.jpg"
+      },
+      {
+            "title": "AI Image 08",
+            "group": "AI Images",
+            "category": "ai",
+            "src": "assets/event-photos/ai/web/ai_08_snap-8-edited.jpg",
+            "thumb": "assets/event-photos/ai/thumbs/ai_08_snap-8-edited.jpg"
+      },
+      {
+            "title": "AI Image 09",
+            "group": "AI Images",
+            "category": "ai",
+            "src": "assets/event-photos/ai/web/ai_09_snap-9-edited.jpg",
+            "thumb": "assets/event-photos/ai/thumbs/ai_09_snap-9-edited.jpg"
+      },
+      {
+            "title": "AI Image 10",
+            "group": "AI Images",
+            "category": "ai",
+            "src": "assets/event-photos/ai/web/ai_10_snap-10-edited.jpg",
+            "thumb": "assets/event-photos/ai/thumbs/ai_10_snap-10-edited.jpg"
+      },
+      {
+            "title": "AI Image 11",
+            "group": "AI Images",
+            "category": "ai",
+            "src": "assets/event-photos/ai/web/ai_11_snap-11-edited.jpg",
+            "thumb": "assets/event-photos/ai/thumbs/ai_11_snap-11-edited.jpg"
+      },
+      {
+            "title": "AI Image 12",
+            "group": "AI Images",
+            "category": "ai",
+            "src": "assets/event-photos/ai/web/ai_12_snap-12-edited.jpg",
+            "thumb": "assets/event-photos/ai/thumbs/ai_12_snap-12-edited.jpg"
       }
 ];
     const lightbox = document.getElementById('photo-lightbox');
     const lightboxImage = document.getElementById('lightbox-image');
     const lightboxTitle = document.getElementById('lightbox-title');
+    const lightboxMeta = document.getElementById('lightbox-meta');
     const lightboxCount = document.getElementById('lightbox-count');
+    const lightboxOpen = document.getElementById('lightbox-open');
+    const filmstrip = document.getElementById('lightbox-filmstrip');
+    const galleryGrid = document.getElementById('photo-gallery-grid');
+    const galleryCount = document.getElementById('gallery-count');
     let activePhotoIndex = 0;
+    let activeFilter = 'all';
+    let visiblePhotoIndexes = eventPhotos.map((_, index) => index);
+
+    function labelFor(photo) { return photo.group || (photo.category === 'ai' ? 'AI Images' : 'Event Photos'); }
+    function updateVisiblePhotos() {
+      visiblePhotoIndexes = eventPhotos.map((_, index) => index).filter((index) => activeFilter === 'all' || eventPhotos[index].category === activeFilter);
+      galleryCount.textContent = `${visiblePhotoIndexes.length} / ${eventPhotos.length} photos`;
+    }
+    function renderGallery() {
+      if (!galleryGrid) return;
+      updateVisiblePhotos();
+      galleryGrid.innerHTML = visiblePhotoIndexes.map((photoIndex, visibleIndex) => {
+        const photo = eventPhotos[photoIndex];
+        return `<button class="photo-card" type="button" data-photo-index="${photoIndex}" data-group="${photo.category}">
+          <img src="${photo.thumb}" alt="${photo.title}" width="720" height="540" loading="lazy" />
+          <span>${String(visibleIndex + 1).padStart(2, '0')}</span>
+        </button>`;
+      }).join('');
+      galleryGrid.querySelectorAll('[data-photo-index]').forEach((button) => {
+        button.addEventListener('click', () => showPhoto(Number(button.dataset.photoIndex || 0)));
+      });
+    }
+    function renderFilmstrip() {
+      if (!filmstrip) return;
+      filmstrip.innerHTML = visiblePhotoIndexes.map((photoIndex) => {
+        const photo = eventPhotos[photoIndex];
+        return `<button type="button" class="filmstrip-thumb${photoIndex === activePhotoIndex ? ' active' : ''}" data-filmstrip-index="${photoIndex}" aria-label="Open ${photo.title}">
+          <img src="${photo.thumb}" alt="" loading="lazy" />
+        </button>`;
+      }).join('');
+      filmstrip.querySelectorAll('[data-filmstrip-index]').forEach((button) => {
+        button.addEventListener('click', () => showPhoto(Number(button.dataset.filmstripIndex || 0)));
+      });
+      filmstrip.querySelector('.filmstrip-thumb.active')?.scrollIntoView({ block: 'nearest', inline: 'center' });
+    }
     function showPhoto(index) {
       if (!eventPhotos.length) return;
-      activePhotoIndex = (index + eventPhotos.length) % eventPhotos.length;
+      if (!visiblePhotoIndexes.includes(index)) index = visiblePhotoIndexes[0] ?? 0;
+      activePhotoIndex = index;
       const photo = eventPhotos[activePhotoIndex];
+      const visiblePosition = visiblePhotoIndexes.indexOf(activePhotoIndex) + 1;
       lightboxImage.src = photo.src;
       lightboxImage.alt = photo.title;
       lightboxTitle.textContent = photo.title;
-      lightboxCount.textContent = `${activePhotoIndex + 1} / ${eventPhotos.length}`;
+      lightboxMeta.textContent = labelFor(photo);
+      lightboxCount.textContent = `${visiblePosition} / ${visiblePhotoIndexes.length} visible · ${eventPhotos.length} total`;
+      lightboxOpen.href = photo.src;
+      renderFilmstrip();
       lightbox?.classList.add('active');
       lightbox?.setAttribute('aria-hidden', 'false');
     }
-    document.querySelectorAll('[data-photo-index]').forEach((button) => {
-      button.addEventListener('click', () => showPhoto(Number(button.dataset.photoIndex || 0)));
+    function stepPhoto(direction) {
+      const pos = visiblePhotoIndexes.indexOf(activePhotoIndex);
+      const next = visiblePhotoIndexes[(pos + direction + visiblePhotoIndexes.length) % visiblePhotoIndexes.length];
+      showPhoto(next);
+    }
+    document.querySelectorAll('[data-gallery-filter]').forEach((button) => {
+      button.addEventListener('click', () => {
+        activeFilter = button.dataset.galleryFilter || 'all';
+        document.querySelectorAll('[data-gallery-filter]').forEach((b) => b.classList.toggle('active', b === button));
+        renderGallery();
+      });
+    });
+    renderGallery();
+    document.getElementById('lightbox-prev')?.addEventListener('click', () => stepPhoto(-1));
+    document.getElementById('lightbox-next')?.addEventListener('click', () => stepPhoto(1));
+    document.getElementById('lightbox-close')?.addEventListener('click', () => {
+      lightbox?.classList.remove('active');
+      lightbox?.setAttribute('aria-hidden', 'true');
+      lightboxImage.src = '';
+    });
+    lightbox?.addEventListener('click', (event) => {
+      if (event.target === lightbox) document.getElementById('lightbox-close')?.click();
+    });
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') { document.getElementById('lightbox-close')?.click(); closeBriefModal(); }
+      if (!lightbox?.classList.contains('active')) return;
+      if (event.key === 'ArrowLeft') stepPhoto(-1);
+      if (event.key === 'ArrowRight') stepPhoto(1);
     });
     document.getElementById('lightbox-prev')?.addEventListener('click', () => showPhoto(activePhotoIndex - 1));
     document.getElementById('lightbox-next')?.addEventListener('click', () => showPhoto(activePhotoIndex + 1));
