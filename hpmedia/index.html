@@ -23,6 +23,10 @@
       --orange: #ffab3d;
       --shadow: 0 24px 90px rgba(0, 0, 0, 0.45);
       --radius: 26px;
+      --nav-height: 76px;
+      --color-dark: #1e1d1e;
+      --color-light: #f2f2f2;
+      --color-accent: #79c35f;
       font-family: Avenir Next, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
@@ -86,8 +90,113 @@
       position: relative;
       width: min(1180px, calc(100% - 40px));
       margin: 0 auto;
-      padding: 28px 0 72px;
+      padding: calc(var(--nav-height) + 28px) 0 72px;
     }
+
+
+    /* 2.1 Media site header */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--nav-height);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      transition: background-color .3s ease, box-shadow .3s ease;
+      background: rgba(4, 16, 29, .42);
+      backdrop-filter: blur(16px);
+    }
+    .nav.scrolled {
+      background-color: var(--color-dark);
+      box-shadow: 0 2px 20px rgba(0,0,0,.3);
+    }
+    .nav .container {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo img { height: 40px; width: auto; display: block; }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      color: var(--color-light);
+      text-decoration: none;
+      transition: color .2s ease;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--color-accent);
+      transition: width .3s ease;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--color-accent); }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { width: 100%; }
+    .menu-button {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 1001;
+    }
+    .menu-button span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background-color: var(--color-light);
+      transition: all .3s ease;
+    }
+    .menu-button.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .menu-button.active span:nth-child(2) { opacity: 0; }
+    .menu-button.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    .fullscreen-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: var(--color-dark);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .3s ease, visibility .3s ease;
+    }
+    .fullscreen-menu.active { opacity: 1; visibility: visible; }
+    .fullscreen-menu a {
+      font-size: 28px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--color-light);
+      text-decoration: none;
+      transition: color .2s ease;
+    }
+    .fullscreen-menu a:hover { color: var(--color-accent); }
 
     header {
       display: flex;
@@ -460,9 +569,11 @@
     }
 
     @media (max-width: 860px) {
-      header { align-items: flex-start; padding-bottom: 34px; }
+      .nav { --nav-height: 64px; }
+      .nav-links { display: none; }
+      .menu-button { display: flex; }
       .partner-lockup { margin-bottom: 42px; }
-      nav { display: none; }
+      header nav { display: none; }
       .hero { grid-template-columns: 1fr; padding-bottom: 52px; }
       .status-card { max-width: 520px; }
       .section-title { display: block; }
@@ -490,21 +601,31 @@
 <body>
   <div class="watermark" aria-hidden="true">hp</div>
   <main class="page">
-    <header>
-      <a class="brand" href="#top" aria-label="HP Hackathon Content Hub home">
-        <span class="brand-mark" aria-hidden="true">hp</span>
-        <span>
-          <strong>HP Hackathon</strong>
-          <span>Content Hub</span>
-        </span>
-      </a>
-      <nav aria-label="Content sections">
-        <a href="#highlight-edits">Highlights</a>
-        <a href="#event-photos">Photos</a>
-        <a href="#vertical-content">Vertical</a>
-        <a href="#long-form-videos">Long Form</a>
-      </nav>
-    </header>
+    <nav class="nav" aria-label="Primary navigation">
+      <div class="container">
+        <a href="../index.html" class="nav-logo" aria-label="Two Point One Media home">
+          <img src="../assets/67dafbf0__ICON_SVG.svg" alt="Two Point One Media" width="23" height="44">
+        </a>
+        <div class="nav-links">
+          <a href="../index.html">Home</a>
+          <a href="../about.html">About</a>
+          <a href="../projects.html">Services</a>
+          <a href="../blog.html">Blog</a>
+          <a href="../contact.html">Contact</a>
+        </div>
+        <button class="menu-button" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="fullscreen-menu" role="navigation" aria-label="Mobile menu">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About</a>
+      <a href="../projects.html">Services</a>
+      <a href="../blog.html">Blog</a>
+      <a href="../contact.html">Contact</a>
+    </div>
 
     <figure class="partner-lockup" aria-label="San José State University and HP partner logos">
       <img src="assets/hp-sjsu-header-logos.jpeg" alt="San José State University Spartans and HP logos" width="1910" height="475" loading="eager" />
@@ -649,5 +770,19 @@
       <span>Content uploads pending</span>
     </footer>
   </main>
+
+  <script>
+    const nav = document.querySelector('.nav');
+    const menuButton = document.querySelector('.menu-button');
+    const menu = document.querySelector('.fullscreen-menu');
+    function updateNav() { nav.classList.toggle('scrolled', window.scrollY > 24); }
+    window.addEventListener('scroll', updateNav, { passive: true });
+    updateNav();
+    menuButton?.addEventListener('click', () => {
+      const open = menuButton.classList.toggle('active');
+      menu?.classList.toggle('active', open);
+      menuButton.setAttribute('aria-expanded', String(open));
+    });
+  </script>
 </body>
 </html>
