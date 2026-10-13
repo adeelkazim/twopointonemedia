@@ -587,8 +587,8 @@
     }
 
     @media (max-width: 560px) {
-      .page { width: min(100% - 28px, 1180px); padding-top: 18px; }
-      h1 { font-size: clamp(44px, 15vw, 72px); }
+      .page { width: min(100% - 28px, 1180px); padding-top: calc(var(--nav-height) + 28px); }
+      h1 { font-size: clamp(42px, 13vw, 72px); }
       .partner-lockup { margin-bottom: 34px; border-radius: 28px; }
       .formats { grid-template-columns: 1fr; }
       summary { padding: 18px; gap: 14px; }
@@ -634,8 +634,8 @@
     <section class="hero" id="top" aria-labelledby="page-title">
       <div>
         <div class="kicker">Two Point One Media deliverables</div>
-        <h1 id="page-title"><span class="gradient-text">HP Hackathon</span><br />content microsite</h1>
-        <p class="subhead">A private destination for HP employees to review the event coverage — organized by format, ready for uploads, and styled to match the Edge AI SJSUHack visual system.</p>
+        <h1 id="page-title"><span class="gradient-text">HP Edge AI</span><br />SJSUHack Content</h1>
+        <p class="subhead">A private destination for HP employees to review the event coverage — organized by format and ready for uploads.</p>
         <div class="hero-actions">
           <a class="button primary" href="#content-library">View content sections</a>
           <a class="button" href="https://sjsu-hackathon.web.app/" target="_blank" rel="noreferrer">Reference event site</a>
