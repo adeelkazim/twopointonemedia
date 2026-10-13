@@ -454,6 +454,116 @@
       background: rgba(5, 23, 40, .78);
     }
 
+
+    .photo-gallery-intro {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 18px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .photo-count-badge {
+      flex: 0 0 auto;
+      color: var(--cyan);
+      background: rgba(51,214,255,.09);
+      border: 1px solid rgba(51,214,255,.28);
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-weight: 900;
+    }
+    .photo-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .photo-card {
+      position: relative;
+      display: block;
+      border: 1px solid rgba(51,214,255,.18);
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255,255,255,.035);
+      cursor: zoom-in;
+      color: inherit;
+      text-align: left;
+      padding: 0;
+      appearance: none;
+      font: inherit;
+      box-shadow: 0 12px 30px rgba(0,0,0,.22);
+    }
+    .photo-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      transition: transform .25s ease, filter .25s ease;
+    }
+    .photo-card:hover img { transform: scale(1.035); filter: brightness(1.08); }
+    .photo-card span {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      color: white;
+      font-weight: 800;
+      font-size: 12px;
+      text-shadow: 0 1px 8px rgba(0,0,0,.75);
+    }
+    .photo-card span::after { content: "View"; opacity: .82; }
+    .photo-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      display: none;
+      place-items: center;
+      padding: 24px;
+      background: rgba(0, 5, 12, .88);
+      backdrop-filter: blur(12px);
+    }
+    .photo-lightbox.active { display: grid; }
+    .lightbox-frame {
+      width: min(1120px, 100%);
+      display: grid;
+      gap: 14px;
+    }
+    .lightbox-frame img {
+      width: 100%;
+      max-height: 78vh;
+      object-fit: contain;
+      border-radius: 18px;
+      box-shadow: 0 30px 90px rgba(0,0,0,.55);
+      background: #02070d;
+    }
+    .lightbox-bar {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      color: white;
+    }
+    .lightbox-title { font-weight: 850; }
+    .lightbox-controls { display: flex; gap: 8px; }
+    .lightbox-controls button {
+      min-width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18);
+      color: white;
+      background: rgba(255,255,255,.08);
+      cursor: pointer;
+      font-weight: 900;
+    }
+
     .status-card {
       position: relative;
       border: 1px solid var(--line);
@@ -663,7 +773,7 @@
       .partner-lockup { margin-bottom: 42px; }
       header nav { display: none; }
       .hero { grid-template-columns: 1fr; padding-bottom: 52px; }
-      .status-card { max-width: 520px; }
+    .status-card { max-width: 520px; }
       .section-title { display: block; }
       .section-title p { margin-top: 12px; }
       .section-body { padding-left: 24px; }
@@ -671,6 +781,9 @@
       details.video-item summary { grid-template-columns: minmax(0, 1fr); }
       .chevron { grid-column: 1 / -1; justify-self: center; width: 34px; height: 34px; }
       .pending-panel { grid-template-columns: 1fr; }
+      .photo-gallery-intro { display: block; }
+      .photo-count-badge { display: inline-flex; margin-top: 12px; }
+      .photo-gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .upload-badge { justify-self: start; }
     }
 
@@ -682,6 +795,10 @@
       .section-number { width: 42px; height: 42px; border-radius: 14px; }
       .section-body { padding: 0 12px 14px; }
       .video-item-body { padding: 8px; }
+      .photo-gallery-grid { gap: 8px; }
+      .photo-card { border-radius: 14px; }
+      .photo-lightbox { padding: 12px; }
+      .lightbox-bar { align-items: flex-start; }
       .button { width: 100%; }
     }
   </style>
@@ -780,12 +897,47 @@
             <span class="chevron" aria-hidden="true">+</span>
           </summary>
           <div class="section-body">
-            <div class="pending-panel">
-              <div>
-                <h4>Upload pending</h4>
-                <p>Photo galleries will appear here after upload. Recommended layout: editorial cover grid, followed by downloadable albums by moment or category.</p>
-              </div>
-              <span class="upload-badge">Upload pending</span>
+            <div class="photo-gallery-intro">
+              <p>Selected and lightly graded from the HP Hackathon Photos folder. Tap any image to open a larger viewer, then use previous/next to move through the set.</p>
+              <span class="photo-count-badge">9 selected photos</span>
+            </div>
+            <div class="photo-gallery-grid" aria-label="Selected HP Hackathon event photos">
+              <button class="photo-card" type="button" data-photo-index="0">
+                <img src="assets/event-photos/thumbs/01_IMG_0356.jpg" alt="Opening group moment" width="720" height="540" loading="lazy" />
+                <span>01</span>
+              </button>
+              <button class="photo-card" type="button" data-photo-index="1">
+                <img src="assets/event-photos/thumbs/02_IMG_0366.jpg" alt="Full audience group photo" width="720" height="540" loading="lazy" />
+                <span>02</span>
+              </button>
+              <button class="photo-card" type="button" data-photo-index="2">
+                <img src="assets/event-photos/thumbs/03_IMG_0371.jpg" alt="Celebration group photo" width="720" height="540" loading="lazy" />
+                <span>03</span>
+              </button>
+              <button class="photo-card" type="button" data-photo-index="3">
+                <img src="assets/event-photos/thumbs/04_IMG_0394.jpg" alt="Finalists and HP team" width="720" height="540" loading="lazy" />
+                <span>04</span>
+              </button>
+              <button class="photo-card" type="button" data-photo-index="4">
+                <img src="assets/event-photos/thumbs/05_IMG_0398.jpg" alt="Awards group portrait" width="720" height="540" loading="lazy" />
+                <span>05</span>
+              </button>
+              <button class="photo-card" type="button" data-photo-index="5">
+                <img src="assets/event-photos/thumbs/06_IMG_0400.jpg" alt="Stage group portrait" width="720" height="540" loading="lazy" />
+                <span>06</span>
+              </button>
+              <button class="photo-card" type="button" data-photo-index="6">
+                <img src="assets/event-photos/thumbs/07_IMG_9903.jpg" alt="Winners on stage" width="720" height="540" loading="lazy" />
+                <span>07</span>
+              </button>
+              <button class="photo-card" type="button" data-photo-index="7">
+                <img src="assets/event-photos/thumbs/08_IMG_9906.jpg" alt="Team award presentation" width="720" height="540" loading="lazy" />
+                <span>08</span>
+              </button>
+              <button class="photo-card" type="button" data-photo-index="8">
+                <img src="assets/event-photos/thumbs/09_IMG_9913.jpg" alt="Team portrait" width="720" height="540" loading="lazy" />
+                <span>09</span>
+              </button>
             </div>
           </div>
         </details>
@@ -833,6 +985,23 @@
     </section>
 
 
+    <div class="photo-lightbox" id="photo-lightbox" aria-hidden="true" role="dialog" aria-label="Event photo viewer">
+      <div class="lightbox-frame">
+        <img id="lightbox-image" src="" alt="" />
+        <div class="lightbox-bar">
+          <div>
+            <div class="lightbox-title" id="lightbox-title"></div>
+            <div id="lightbox-count"></div>
+          </div>
+          <div class="lightbox-controls">
+            <button type="button" id="lightbox-prev" aria-label="Previous photo">‹</button>
+            <button type="button" id="lightbox-next" aria-label="Next photo">›</button>
+            <button type="button" id="lightbox-close" aria-label="Close photo viewer">×</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <footer class="site-footer">
       <div class="footer-social" aria-label="Two Point One Media social links">
         <a href="https://www.instagram.com/twopointone.media/" target="_blank" rel="noopener noreferrer" aria-label="Follow 2.1 Media on Instagram">
@@ -866,6 +1035,81 @@
       menu?.classList.toggle('active', open);
       menuButton.setAttribute('aria-expanded', String(open));
     });
+
+    const eventPhotos = [
+      {
+            "title": "Opening group moment",
+            "src": "assets/event-photos/web/01_IMG_0356.jpg"
+      },
+      {
+            "title": "Full audience group photo",
+            "src": "assets/event-photos/web/02_IMG_0366.jpg"
+      },
+      {
+            "title": "Celebration group photo",
+            "src": "assets/event-photos/web/03_IMG_0371.jpg"
+      },
+      {
+            "title": "Finalists and HP team",
+            "src": "assets/event-photos/web/04_IMG_0394.jpg"
+      },
+      {
+            "title": "Awards group portrait",
+            "src": "assets/event-photos/web/05_IMG_0398.jpg"
+      },
+      {
+            "title": "Stage group portrait",
+            "src": "assets/event-photos/web/06_IMG_0400.jpg"
+      },
+      {
+            "title": "Winners on stage",
+            "src": "assets/event-photos/web/07_IMG_9903.jpg"
+      },
+      {
+            "title": "Team award presentation",
+            "src": "assets/event-photos/web/08_IMG_9906.jpg"
+      },
+      {
+            "title": "Team portrait",
+            "src": "assets/event-photos/web/09_IMG_9913.jpg"
+      }
+];
+    const lightbox = document.getElementById('photo-lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxTitle = document.getElementById('lightbox-title');
+    const lightboxCount = document.getElementById('lightbox-count');
+    let activePhotoIndex = 0;
+    function showPhoto(index) {
+      if (!eventPhotos.length) return;
+      activePhotoIndex = (index + eventPhotos.length) % eventPhotos.length;
+      const photo = eventPhotos[activePhotoIndex];
+      lightboxImage.src = photo.src;
+      lightboxImage.alt = photo.title;
+      lightboxTitle.textContent = photo.title;
+      lightboxCount.textContent = `${activePhotoIndex + 1} / ${eventPhotos.length}`;
+      lightbox?.classList.add('active');
+      lightbox?.setAttribute('aria-hidden', 'false');
+    }
+    document.querySelectorAll('[data-photo-index]').forEach((button) => {
+      button.addEventListener('click', () => showPhoto(Number(button.dataset.photoIndex || 0)));
+    });
+    document.getElementById('lightbox-prev')?.addEventListener('click', () => showPhoto(activePhotoIndex - 1));
+    document.getElementById('lightbox-next')?.addEventListener('click', () => showPhoto(activePhotoIndex + 1));
+    document.getElementById('lightbox-close')?.addEventListener('click', () => {
+      lightbox?.classList.remove('active');
+      lightbox?.setAttribute('aria-hidden', 'true');
+      lightboxImage.src = '';
+    });
+    lightbox?.addEventListener('click', (event) => {
+      if (event.target === lightbox) document.getElementById('lightbox-close')?.click();
+    });
+    window.addEventListener('keydown', (event) => {
+      if (!lightbox?.classList.contains('active')) return;
+      if (event.key === 'Escape') document.getElementById('lightbox-close')?.click();
+      if (event.key === 'ArrowLeft') showPhoto(activePhotoIndex - 1);
+      if (event.key === 'ArrowRight') showPhoto(activePhotoIndex + 1);
+    });
+
   </script>
 </body>
 </html>
