@@ -623,41 +623,6 @@
     }
 
 
-    .gallery-toolbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin: 0 0 18px;
-    }
-    .gallery-filters {
-      display: inline-flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .gallery-filter {
-      min-height: 38px;
-      padding: 0 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(51,214,255,.25);
-      background: rgba(255,255,255,.035);
-      color: var(--muted);
-      cursor: pointer;
-      font-weight: 850;
-    }
-    .gallery-filter.active {
-      color: white;
-      border-color: rgba(51,214,255,.55);
-      background: rgba(51,214,255,.16);
-    }
-    .gallery-count {
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
     .photo-gallery-grid.enhanced {
       grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
       gap: 10px;
@@ -959,7 +924,6 @@
       .section-body { padding: 0 12px 14px; }
       .video-item-body { padding: 8px; }
       .photo-gallery-grid { gap: 8px; }
-      .gallery-toolbar { align-items: flex-start; }
       .photo-gallery-grid.enhanced { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .lightbox-frame.enhanced { max-height: calc(100vh - 24px); }
       .lightbox-main img { max-height: 58vh; }
@@ -1073,14 +1037,6 @@
             <div class="photo-gallery-intro">
               <p>Browse the selected event photos and the newly added AI Images from Drive. Use the filters below, then tap any image to open the full gallery viewer.</p>
               <span class="photo-count-badge">21 photos</span>
-            </div>
-            <div class="gallery-toolbar" aria-label="Photo gallery controls">
-              <div class="gallery-filters" role="group" aria-label="Filter photos">
-                <button class="gallery-filter active" type="button" data-gallery-filter="all">All</button>
-                <button class="gallery-filter" type="button" data-gallery-filter="event">Event Photos</button>
-                <button class="gallery-filter" type="button" data-gallery-filter="ai">AI Images</button>
-              </div>
-              <span class="gallery-count" id="gallery-count">21 photos</span>
             </div>
             <div class="photo-gallery-grid enhanced" id="photo-gallery-grid" aria-label="Selected HP Hackathon event and AI images"></div>
           </div>
@@ -1371,15 +1327,12 @@
     const lightboxOpen = document.getElementById('lightbox-open');
     const filmstrip = document.getElementById('lightbox-filmstrip');
     const galleryGrid = document.getElementById('photo-gallery-grid');
-    const galleryCount = document.getElementById('gallery-count');
     let activePhotoIndex = 0;
-    let activeFilter = 'all';
     let visiblePhotoIndexes = eventPhotos.map((_, index) => index);
 
     function labelFor(photo) { return photo.group || (photo.category === 'ai' ? 'AI Images' : 'Event Photos'); }
     function updateVisiblePhotos() {
-      visiblePhotoIndexes = eventPhotos.map((_, index) => index).filter((index) => activeFilter === 'all' || eventPhotos[index].category === activeFilter);
-      galleryCount.textContent = `${visiblePhotoIndexes.length} / ${eventPhotos.length} photos`;
+      visiblePhotoIndexes = eventPhotos.map((_, index) => index);
     }
     function renderGallery() {
       if (!galleryGrid) return;
@@ -1429,13 +1382,6 @@
       const next = visiblePhotoIndexes[(pos + direction + visiblePhotoIndexes.length) % visiblePhotoIndexes.length];
       showPhoto(next);
     }
-    document.querySelectorAll('[data-gallery-filter]').forEach((button) => {
-      button.addEventListener('click', () => {
-        activeFilter = button.dataset.galleryFilter || 'all';
-        document.querySelectorAll('[data-gallery-filter]').forEach((b) => b.classList.toggle('active', b === button));
-        renderGallery();
-      });
-    });
     renderGallery();
     document.getElementById('lightbox-prev')?.addEventListener('click', () => stepPhoto(-1));
     document.getElementById('lightbox-next')?.addEventListener('click', () => stepPhoto(1));
