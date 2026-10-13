@@ -282,7 +282,7 @@
 
     .partner-lockup {
       margin: 0 auto 42px;
-      width: min(480px, 82vw);
+      width: min(360px, 70vw);
     }
     .partner-lockup img {
       display: block;
@@ -321,10 +321,10 @@
     .kicker::after { background: linear-gradient(90deg, var(--cyan), transparent); }
     h1 {
       margin: 0;
-      max-width: 720px;
+      max-width: 540px;
       margin-left: auto;
       margin-right: auto;
-      font-size: clamp(34px, 6.3vw, 76px);
+      font-size: clamp(26px, 4.7vw, 57px);
       line-height: .91;
       letter-spacing: -0.07em;
       text-wrap: balance;
@@ -338,9 +338,9 @@
     .subhead {
       margin: 28px 0 0;
       color: var(--muted);
-      font-size: clamp(18px, 2.2vw, 27px);
+      font-size: clamp(14px, 1.65vw, 20px);
       line-height: 1.35;
-      max-width: 760px;
+      max-width: 570px;
       margin-left: auto;
       margin-right: auto;
       text-wrap: pretty;
@@ -379,11 +379,11 @@
       position: relative;
       margin: 32px auto 0;
       overflow: visible;
-      max-width: 640px;
+      max-width: 480px;
     }
     .hero-gif-card img {
       display: block;
-      width: min(100%, 640px);
+      width: min(100%, 480px);
       height: auto;
       margin: 0 auto;
       aspect-ratio: 16 / 9;
@@ -556,6 +556,62 @@
       background: rgba(255,255,255,.08);
       cursor: pointer;
       font-weight: 900;
+    }
+
+    .pdf-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      display: none;
+      place-items: center;
+      padding: 24px;
+      background: rgba(0, 5, 12, .88);
+      backdrop-filter: blur(12px);
+    }
+    .pdf-modal.active { display: grid; }
+    .pdf-frame {
+      width: min(1040px, 100%);
+      height: min(82vh, 860px);
+      display: grid;
+      grid-template-rows: auto 1fr;
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: #071524;
+      box-shadow: 0 30px 90px rgba(0,0,0,.55);
+    }
+    .pdf-bar {
+      min-height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 0 16px;
+      color: white;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      font-weight: 850;
+    }
+    .pdf-bar-actions { display: flex; align-items: center; gap: 8px; }
+    .pdf-bar a,
+    .pdf-bar button {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18);
+      color: white;
+      background: rgba(255,255,255,.08);
+      text-decoration: none;
+      cursor: pointer;
+      padding: 0 13px;
+      font-weight: 850;
+    }
+    .pdf-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: white;
     }
 
     .status-card {
@@ -764,7 +820,7 @@
       .nav { --nav-height: 64px; }
       .nav-links { display: none; }
       .menu-button { display: flex; }
-      .partner-lockup { margin-bottom: 36px; width: min(420px, 78vw); }
+      .partner-lockup { margin-bottom: 36px; width: min(315px, 66vw); }
       header nav { display: none; }
       .hero { padding-bottom: 52px; }
     .status-card { max-width: 520px; }
@@ -783,16 +839,19 @@
 
     @media (max-width: 560px) {
       .page { width: min(100% - 28px, 1180px); padding-top: calc(var(--nav-height) + 28px); }
-      h1 { font-size: clamp(29px, 9.1vw, 50px); }
-      .partner-lockup { margin-bottom: 28px; width: min(320px, 76vw); }
+      h1 { font-size: clamp(22px, 6.8vw, 38px); }
+      .partner-lockup { margin-bottom: 28px; width: min(240px, 64vw); }
       summary { padding: 18px; gap: 14px; }
       .section-number { width: 42px; height: 42px; border-radius: 14px; }
       .section-body { padding: 0 12px 14px; }
       .video-item-body { padding: 8px; }
       .photo-gallery-grid { gap: 8px; }
       .photo-card { border-radius: 14px; }
-      .photo-lightbox { padding: 12px; }
+      .photo-lightbox, .pdf-modal { padding: 12px; }
       .lightbox-bar { align-items: flex-start; }
+      .hero-gif-card { max-width: 270px; }
+      .pdf-frame { height: min(82vh, 720px); }
+      .pdf-bar { align-items: flex-start; padding: 12px; flex-direction: column; }
       .button { width: 100%; }
     }
   </style>
@@ -827,7 +886,7 @@
     </div>
 
     <figure class="partner-lockup" aria-label="San José State University and HP partner logos">
-      <img src="assets/hp-sjsu-header-logos.jpeg" alt="San José State University Spartans and HP logos" width="1910" height="475" loading="eager" />
+      <img src="assets/hp-sjsu-logos-clean.png" alt="San José State University Spartans and HP logos" width="630" height="269" loading="eager" />
     </figure>
 
     <section class="hero" id="top" aria-labelledby="page-title">
@@ -838,6 +897,7 @@
         <div class="hero-actions">
           <a class="button primary" href="#content-library">View content sections</a>
           <a class="button" href="https://sjsu-hackathon.web.app/" target="_blank" rel="noreferrer">HP x SJSU event site</a>
+          <button class="button" type="button" id="brief-button">Pre-production brief</button>
         </div>
         <figure class="hero-gif-card" aria-label="Looping preview from the HP Edge AI Hackathon video">
           <img src="assets/hp-edge-ai-preview.gif" alt="Looping preview from the HP Edge AI Hackathon video" width="640" height="360" loading="eager" />
@@ -978,6 +1038,19 @@
     </section>
 
 
+    <div class="pdf-modal" id="brief-modal" aria-hidden="true" role="dialog" aria-label="Pre-production brief PDF viewer">
+      <div class="pdf-frame">
+        <div class="pdf-bar">
+          <span>HP Edge AI Pre-production Brief</span>
+          <div class="pdf-bar-actions">
+            <a href="assets/TwoPointOneMedia_EdgeAI_PreProduction_Brief.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
+            <button type="button" id="brief-close" aria-label="Close pre-production brief">Close</button>
+          </div>
+        </div>
+        <iframe id="brief-pdf" title="HP Edge AI Pre-production Brief" src="assets/TwoPointOneMedia_EdgeAI_PreProduction_Brief.pdf"></iframe>
+      </div>
+    </div>
+
     <div class="photo-lightbox" id="photo-lightbox" aria-hidden="true" role="dialog" aria-label="Event photo viewer">
       <div class="lightbox-frame">
         <img id="lightbox-image" src="" alt="" />
@@ -1028,6 +1101,22 @@
       menu?.classList.toggle('active', open);
       menuButton.setAttribute('aria-expanded', String(open));
     });
+    const briefButton = document.getElementById('brief-button');
+    const briefModal = document.getElementById('brief-modal');
+    const briefClose = document.getElementById('brief-close');
+    function closeBriefModal() {
+      briefModal?.classList.remove('active');
+      briefModal?.setAttribute('aria-hidden', 'true');
+    }
+    briefButton?.addEventListener('click', () => {
+      briefModal?.classList.add('active');
+      briefModal?.setAttribute('aria-hidden', 'false');
+    });
+    briefClose?.addEventListener('click', closeBriefModal);
+    briefModal?.addEventListener('click', (event) => {
+      if (event.target === briefModal) closeBriefModal();
+    });
+
 
     const eventPhotos = [
       {
@@ -1098,7 +1187,7 @@
     });
     window.addEventListener('keydown', (event) => {
       if (!lightbox?.classList.contains('active')) return;
-      if (event.key === 'Escape') document.getElementById('lightbox-close')?.click();
+      if (event.key === 'Escape') { document.getElementById('lightbox-close')?.click(); closeBriefModal(); }
       if (event.key === 'ArrowLeft') showPhoto(activePhotoIndex - 1);
       if (event.key === 'ArrowRight') showPhoto(activePhotoIndex + 1);
     });
