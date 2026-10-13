@@ -302,6 +302,10 @@
       gap: 32px;
       align-items: end;
     }
+    .hero-copy {
+      text-align: center;
+      justify-self: center;
+    }
     .kicker {
       display: inline-flex;
       align-items: center;
@@ -313,15 +317,19 @@
       font-weight: 800;
       margin-bottom: 18px;
     }
-    .kicker::before {
+    .kicker::before,
+    .kicker::after {
       content: "";
       width: 42px;
       height: 1px;
-      background: linear-gradient(90deg, var(--cyan), transparent);
+      background: linear-gradient(90deg, transparent, var(--cyan));
     }
+    .kicker::after { background: linear-gradient(90deg, var(--cyan), transparent); }
     h1 {
       margin: 0;
-      max-width: 820px;
+      max-width: 920px;
+      margin-left: auto;
+      margin-right: auto;
       font-size: clamp(48px, 9vw, 108px);
       line-height: .91;
       letter-spacing: -0.07em;
@@ -339,12 +347,15 @@
       font-size: clamp(18px, 2.2vw, 27px);
       line-height: 1.35;
       max-width: 760px;
+      margin-left: auto;
+      margin-right: auto;
       text-wrap: pretty;
     }
     .hero-actions {
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
+      justify-content: center;
       margin-top: 34px;
     }
     .button {
@@ -533,40 +544,43 @@
       white-space: nowrap;
     }
 
-    .formats {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 54px;
-    }
-    .format-card {
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 20px;
-      padding: 18px;
-      background: rgba(255,255,255,.035);
-      min-height: 136px;
-    }
-    .format-card span {
-      color: var(--green);
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: .14em;
-      font-weight: 900;
-    }
-    .format-card h3 { margin: 18px 0 0; font-size: 18px; }
-    .format-card p { margin: 8px 0 0; color: var(--muted); font-size: 14px; line-height: 1.45; }
 
-    footer {
-      margin-top: 70px;
-      padding-top: 22px;
+    .site-footer {
+      margin-top: 80px;
+      padding: 46px 0 34px;
       border-top: 1px solid rgba(255,255,255,.10);
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      color: var(--faint);
-      font-size: 13px;
-      flex-wrap: wrap;
+      background: rgba(30, 29, 30, .66);
+      border-radius: 28px 28px 0 0;
     }
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 34px;
+    }
+    .footer-social a {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: var(--color-light);
+      background-color: rgba(255,255,255,.05);
+      transition: background-color .2s ease;
+    }
+    .footer-social a:hover { background-color: var(--color-accent); }
+    .footer-social svg { width: 20px; height: 20px; fill: currentColor; }
+    .footer-social img { width: 20px; height: 20px; filter: brightness(0) invert(1); opacity: 1; }
+    .footer-bottom {
+      text-align: center;
+      color: var(--color-light);
+      font-size: 13px;
+      opacity: .5;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255,255,255,.10);
+    }
+    .footer-bottom p { margin: 0; }
 
     @media (max-width: 860px) {
       .nav { --nav-height: 64px; }
@@ -578,7 +592,6 @@
       .status-card { max-width: 520px; }
       .section-title { display: block; }
       .section-title p { margin-top: 12px; }
-      .formats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .section-body { padding-left: 24px; }
       summary { grid-template-columns: auto minmax(0, 1fr); }
       .chevron { grid-column: 1 / -1; justify-self: start; width: 34px; height: 34px; }
@@ -590,7 +603,6 @@
       .page { width: min(100% - 28px, 1180px); padding-top: calc(var(--nav-height) + 28px); }
       h1 { font-size: clamp(42px, 13vw, 72px); }
       .partner-lockup { margin-bottom: 34px; border-radius: 28px; }
-      .formats { grid-template-columns: 1fr; }
       summary { padding: 18px; gap: 14px; }
       .section-number { width: 42px; height: 42px; border-radius: 14px; }
       .section-body { padding: 0 18px 18px; }
@@ -632,7 +644,7 @@
     </figure>
 
     <section class="hero" id="top" aria-labelledby="page-title">
-      <div>
+      <div class="hero-copy">
         <div class="kicker">Two Point One Media deliverables</div>
         <h1 id="page-title"><span class="gradient-text">HP Edge AI</span><br />SJSUHack Content</h1>
         <p class="subhead">A private destination for HP employees to review the event coverage — organized by format and ready for uploads.</p>
@@ -742,32 +754,25 @@
       </div>
     </section>
 
-    <section class="formats" aria-label="Content formats summary">
-      <article class="format-card">
-        <span>01</span>
-        <h3>Fast review</h3>
-        <p>Collapsed sections keep the microsite easy to scan for busy HP employees.</p>
-      </article>
-      <article class="format-card">
-        <span>02</span>
-        <h3>Media-ready</h3>
-        <p>Each placeholder is structured so video players, galleries, or download links can drop in cleanly.</p>
-      </article>
-      <article class="format-card">
-        <span>03</span>
-        <h3>Event aligned</h3>
-        <p>Visual language references the official Edge AI SJSUHack site without copying its full layout.</p>
-      </article>
-      <article class="format-card">
-        <span>04</span>
-        <h3>Shareable</h3>
-        <p>Built as a static page, ready to host once the content files and access rules are finalized.</p>
-      </article>
-    </section>
 
-    <footer>
-      <span>HP Hackathon Content Hub · Two Point One Media</span>
-      <span>Content uploads pending</span>
+    <footer class="site-footer">
+      <div class="footer-social" aria-label="Two Point One Media social links">
+        <a href="https://www.instagram.com/twopointone.media/" target="_blank" rel="noopener noreferrer" aria-label="Follow 2.1 Media on Instagram">
+          <img src="../assets/67fea431__instagram.svg" alt="" width="20" height="20">
+        </a>
+        <a href="https://www.tiktok.com/@twopointone.media" target="_blank" rel="noopener noreferrer" aria-label="Follow 2.1 Media on TikTok">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V8.74a8.19 8.19 0 004.76 1.52V6.82a4.84 4.84 0 01-1-.13z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/two-point-one-media" target="_blank" rel="noopener noreferrer" aria-label="Follow 2.1 Media on LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/channel/UC9Be4V3dTaIsmB6WbX2R2rQ" target="_blank" rel="noopener noreferrer" aria-label="Watch 2.1 Media on YouTube">
+          <img src="../assets/67fea431__youtube.svg" alt="" width="20" height="20">
+        </a>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Two Point One Media. All rights reserved.</p>
+      </div>
     </footer>
   </main>
 
