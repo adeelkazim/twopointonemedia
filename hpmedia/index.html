@@ -383,29 +383,19 @@
 
     .hero-gif-card {
       position: relative;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(255,255,255,.065), rgba(255,255,255,.025));
-      box-shadow: var(--shadow);
-      padding: 14px;
-      overflow: hidden;
-      backdrop-filter: blur(18px);
+      margin: 0;
+      overflow: visible;
+      justify-self: stretch;
     }
     .hero-gif-card img {
       display: block;
-      width: 100%;
+      width: min(100%, 640px);
       height: auto;
+      margin: 0 auto;
       aspect-ratio: 16 / 9;
-      object-fit: cover;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.10);
-    }
-    .hero-gif-card figcaption {
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.45;
-      text-align: center;
+      object-fit: contain;
+      border-radius: 22px;
+      box-shadow: 0 24px 80px rgba(0,0,0,.34);
     }
     .chevron {
       justify-self: center;
@@ -413,36 +403,48 @@
       text-align: center;
       line-height: 1;
     }
-    .highlight-video-card {
+    .video-list {
+      display: grid;
+      gap: 16px;
+    }
+    details.video-item {
       border: 1px solid rgba(51,214,255,.24);
       border-radius: 22px;
       background: rgba(255,255,255,.035);
+      overflow: hidden;
+    }
+    details.video-item summary {
+      grid-template-columns: minmax(0,1fr) auto;
+      padding: 18px 20px;
+    }
+    details.video-item summary h4 {
+      margin: 0 0 6px;
+      font-size: clamp(18px, 2.4vw, 24px);
+      letter-spacing: -.02em;
+    }
+    details.video-item summary p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    .video-item-body {
+      border-top: 1px solid rgba(255,255,255,.08);
       padding: 18px;
     }
-    .drive-video-frame {
+    .video-frame {
       width: 100%;
       aspect-ratio: 16 / 9;
-      border: 0;
       border-radius: 16px;
       background: #000;
       display: block;
-    }
-    .highlight-video-card h4 {
-      margin: 16px 0 8px;
-      font-size: 20px;
-      letter-spacing: -.02em;
-    }
-    .highlight-video-card p {
-      margin: 0 0 14px;
-      color: var(--muted);
-      line-height: 1.55;
-      max-width: 760px;
+      object-fit: contain;
     }
     .drive-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       min-height: 42px;
+      margin-top: 14px;
       padding: 0 16px;
       border-radius: 999px;
       color: white;
@@ -661,11 +663,12 @@
       .partner-lockup { margin-bottom: 42px; }
       header nav { display: none; }
       .hero { grid-template-columns: 1fr; padding-bottom: 52px; }
-      .status-card, .hero-gif-card { max-width: 520px; }
+      .status-card { max-width: 520px; }
       .section-title { display: block; }
       .section-title p { margin-top: 12px; }
       .section-body { padding-left: 24px; }
       summary { grid-template-columns: auto minmax(0, 1fr); }
+      details.video-item summary { grid-template-columns: minmax(0, 1fr); }
       .chevron { grid-column: 1 / -1; justify-self: center; width: 34px; height: 34px; }
       .pending-panel { grid-template-columns: 1fr; }
       .upload-badge { justify-self: start; }
@@ -728,7 +731,6 @@
 
       <figure class="hero-gif-card" aria-label="Looping preview from the HP Edge AI Hackathon video">
         <img src="assets/hp-edge-ai-preview.gif" alt="Looping preview from the HP Edge AI Hackathon video" width="640" height="360" loading="eager" />
-        <figcaption>Preview loop from the HP Edge AI SJSUHack content package.</figcaption>
       </figure>
     </section>
 
@@ -749,11 +751,20 @@
             <span class="chevron" aria-hidden="true">+</span>
           </summary>
           <div class="section-body">
-            <div class="highlight-video-card">
-              <iframe class="drive-video-frame" src="https://drive.google.com/file/d/1OuFAymgTu6SMoePnYCwpnCi_V8fWPY7J/preview" title="HP Edge AI NDE Final Cut" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe>
-              <h4>HP Edge AI NDE — Final Cut</h4>
-              <p>Featured highlight edit from the HP Hackathon Videos folder.</p>
-              <a class="drive-link" href="https://drive.google.com/file/d/1OuFAymgTu6SMoePnYCwpnCi_V8fWPY7J/view" target="_blank" rel="noopener noreferrer">Open video in Google Drive</a>
+            <div class="video-list" aria-label="Highlight edit videos">
+              <details class="video-item" open>
+                <summary>
+                  <span>
+                    <h4>HP Edge AI NDE — Final Cut</h4>
+                    <p>Featured highlight edit from the HP Hackathon Videos folder.</p>
+                  </span>
+                  <span class="chevron" aria-hidden="true">+</span>
+                </summary>
+                <div class="video-item-body">
+                  <video class="video-frame" controls preload="metadata" playsinline src="assets/hp-edge-ai-final-web.mp4"></video>
+                  <a class="drive-link" href="https://drive.google.com/file/d/1OuFAymgTu6SMoePnYCwpnCi_V8fWPY7J/view" target="_blank" rel="noopener noreferrer">Open full quality video in Google Drive</a>
+                </div>
+              </details>
             </div>
           </div>
         </details>
