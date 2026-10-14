@@ -615,11 +615,34 @@
       padding: 0 13px;
       font-weight: 850;
     }
-    .pdf-frame iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
+    .brief-viewer {
+      min-height: 0;
+      overflow: auto;
+      display: grid;
+      place-items: start center;
+      padding: 16px;
+      background: #02070d;
+      -webkit-overflow-scrolling: touch;
+    }
+    .brief-page-image {
+      width: min(100%, 760px);
+      height: auto;
+      display: block;
+      border-radius: 12px;
       background: white;
+      box-shadow: 0 18px 50px rgba(0,0,0,.38);
+    }
+    .brief-page-controls {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brief-page-count {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 850;
+      min-width: 86px;
+      text-align: center;
     }
 
 
@@ -812,7 +835,7 @@
       color: var(--muted);
       transition: transform .2s ease, color .2s ease;
     }
-    details[open] .chevron { transform: rotate(45deg); color: var(--ink); }
+    details[open] .chevron { transform: none; color: var(--ink); }
 
     .section-body {
       border-top: 1px solid rgba(255,255,255,.08);
@@ -933,9 +956,14 @@
       .photo-card { border-radius: 14px; }
       .photo-lightbox, .pdf-modal { padding: 12px; }
       .lightbox-bar { align-items: flex-start; }
-      .hero-gif-card { max-width: 270px; }
-      .pdf-frame { height: min(82vh, 720px); }
-      .pdf-bar { align-items: flex-start; padding: 12px; flex-direction: column; }
+      .hero-gif-card { max-width: 351px; }
+      .pdf-modal { padding: 0; align-items: stretch; justify-items: stretch; }
+      .pdf-frame { width: 100%; height: 100dvh; max-height: 100dvh; border-radius: 0; border: 0; }
+      .pdf-bar { align-items: flex-start; padding: 12px; flex-direction: column; gap: 10px; }
+      .pdf-bar-actions { width: 100%; justify-content: space-between; flex-wrap: wrap; }
+      .pdf-bar a, .pdf-bar button { min-height: 40px; padding: 0 12px; }
+      .brief-viewer { padding: 10px; align-items: start; }
+      .brief-page-image { width: 100%; max-width: none; border-radius: 8px; }
       .button { width: 100%; }
     }
   </style>
@@ -1035,7 +1063,7 @@
           </summary>
           <div class="section-body">
             <div class="photo-gallery-intro">
-              <p>Browse the selected event photos and the newly added AI Images from Drive. Use the filters below, then tap any image to open the full gallery viewer.</p>
+              <p>Browse the selected event photos and the newly added AI Images from Drive. Tap any image to open the full gallery viewer.</p>
               <span class="photo-count-badge">21 photos</span>
             </div>
             <div class="photo-gallery-grid enhanced" id="photo-gallery-grid" aria-label="Selected HP Hackathon event and AI images"></div>
@@ -1085,16 +1113,23 @@
     </section>
 
 
-    <div class="pdf-modal" id="brief-modal" aria-hidden="true" role="dialog" aria-label="Pre-production brief PDF viewer">
+    <div class="pdf-modal" id="brief-modal" aria-hidden="true" role="dialog" aria-label="Pre-production brief viewer">
       <div class="pdf-frame">
         <div class="pdf-bar">
           <span>HP Edge AI Pre-production Brief</span>
           <div class="pdf-bar-actions">
+            <div class="brief-page-controls" aria-label="Brief page controls">
+              <button type="button" id="brief-prev" aria-label="Previous brief page">Prev</button>
+              <span class="brief-page-count" id="brief-count">Page 1 / 3</span>
+              <button type="button" id="brief-next" aria-label="Next brief page">Next</button>
+            </div>
             <a href="assets/TwoPointOneMedia_EdgeAI_PreProduction_Brief.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
             <button type="button" id="brief-close" aria-label="Close pre-production brief">Close</button>
           </div>
         </div>
-        <iframe id="brief-pdf" title="HP Edge AI Pre-production Brief" src="assets/TwoPointOneMedia_EdgeAI_PreProduction_Brief.pdf"></iframe>
+        <div class="brief-viewer" id="brief-viewer">
+          <img class="brief-page-image" id="brief-page-image" src="assets/brief-pages/brief-page-01.jpg" alt="HP Edge AI Pre-production Brief page 1" width="1600" height="2071" loading="eager" />
+        </div>
       </div>
     </div>
 
@@ -1142,6 +1177,14 @@
   </main>
 
   <script>
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    const forceTopOnLoad = () => {
+      const navType = performance.getEntriesByType?.('navigation')?.[0]?.type;
+      if (!location.hash || navType === 'reload') requestAnimationFrame(() => window.scrollTo(0, 0));
+    };
+    window.addEventListener('pageshow', forceTopOnLoad);
+    window.addEventListener('load', forceTopOnLoad);
+
     const nav = document.querySelector('.nav');
     const menuButton = document.querySelector('.menu-button');
     const menu = document.querySelector('.fullscreen-menu');
@@ -1156,18 +1199,46 @@
     const briefButton = document.getElementById('brief-button');
     const briefModal = document.getElementById('brief-modal');
     const briefClose = document.getElementById('brief-close');
+    const briefPrev = document.getElementById('brief-prev');
+    const briefNext = document.getElementById('brief-next');
+    const briefCount = document.getElementById('brief-count');
+    const briefViewer = document.getElementById('brief-viewer');
+    const briefPageImage = document.getElementById('brief-page-image');
+    const briefPages = [
+      'assets/brief-pages/brief-page-01.jpg',
+      'assets/brief-pages/brief-page-02.jpg',
+      'assets/brief-pages/brief-page-03.jpg'
+    ];
+    let activeBriefPage = 0;
+    function showBriefPage(index) {
+      activeBriefPage = Math.max(0, Math.min(briefPages.length - 1, index));
+      if (briefPageImage) {
+        briefPageImage.src = briefPages[activeBriefPage];
+        briefPageImage.alt = `HP Edge AI Pre-production Brief page ${activeBriefPage + 1}`;
+      }
+      if (briefCount) briefCount.textContent = `Page ${activeBriefPage + 1} / ${briefPages.length}`;
+      if (briefPrev) briefPrev.disabled = activeBriefPage === 0;
+      if (briefNext) briefNext.disabled = activeBriefPage === briefPages.length - 1;
+      briefViewer?.scrollTo({ top: 0, behavior: 'instant' });
+    }
     function closeBriefModal() {
       briefModal?.classList.remove('active');
       briefModal?.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
     }
     briefButton?.addEventListener('click', () => {
+      showBriefPage(0);
       briefModal?.classList.add('active');
       briefModal?.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
     });
+    briefPrev?.addEventListener('click', () => showBriefPage(activeBriefPage - 1));
+    briefNext?.addEventListener('click', () => showBriefPage(activeBriefPage + 1));
     briefClose?.addEventListener('click', closeBriefModal);
     briefModal?.addEventListener('click', (event) => {
       if (event.target === briefModal) closeBriefModal();
     });
+    showBriefPage(0);
 
 
     const eventPhotos = [
@@ -1357,7 +1428,11 @@
         </button>`;
       }).join('');
       filmstrip.querySelectorAll('[data-filmstrip-index]').forEach((button) => {
-        button.addEventListener('click', () => showPhoto(Number(button.dataset.filmstripIndex || 0)));
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          showPhoto(Number(button.dataset.filmstripIndex || 0));
+        });
       });
       filmstrip.querySelector('.filmstrip-thumb.active')?.scrollIntoView({ block: 'nearest', inline: 'center' });
     }
@@ -1367,8 +1442,9 @@
       activePhotoIndex = index;
       const photo = eventPhotos[activePhotoIndex];
       const visiblePosition = visiblePhotoIndexes.indexOf(activePhotoIndex) + 1;
-      lightboxImage.src = photo.src;
+      lightboxImage.removeAttribute('src');
       lightboxImage.alt = photo.title;
+      lightboxImage.src = photo.src;
       lightboxTitle.textContent = photo.title;
       lightboxMeta.textContent = labelFor(photo);
       lightboxCount.textContent = `${visiblePosition} / ${visiblePhotoIndexes.length} visible · ${eventPhotos.length} total`;
@@ -1395,26 +1471,16 @@
     });
     window.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') { document.getElementById('lightbox-close')?.click(); closeBriefModal(); }
+      if (briefModal?.classList.contains('active')) {
+        if (event.key === 'ArrowLeft') showBriefPage(activeBriefPage - 1);
+        if (event.key === 'ArrowRight') showBriefPage(activeBriefPage + 1);
+        return;
+      }
       if (!lightbox?.classList.contains('active')) return;
       if (event.key === 'ArrowLeft') stepPhoto(-1);
       if (event.key === 'ArrowRight') stepPhoto(1);
     });
-    document.getElementById('lightbox-prev')?.addEventListener('click', () => showPhoto(activePhotoIndex - 1));
-    document.getElementById('lightbox-next')?.addEventListener('click', () => showPhoto(activePhotoIndex + 1));
-    document.getElementById('lightbox-close')?.addEventListener('click', () => {
-      lightbox?.classList.remove('active');
-      lightbox?.setAttribute('aria-hidden', 'true');
-      lightboxImage.src = '';
-    });
-    lightbox?.addEventListener('click', (event) => {
-      if (event.target === lightbox) document.getElementById('lightbox-close')?.click();
-    });
-    window.addEventListener('keydown', (event) => {
-      if (!lightbox?.classList.contains('active')) return;
-      if (event.key === 'Escape') { document.getElementById('lightbox-close')?.click(); closeBriefModal(); }
-      if (event.key === 'ArrowLeft') showPhoto(activePhotoIndex - 1);
-      if (event.key === 'ArrowRight') showPhoto(activePhotoIndex + 1);
-    });
+
 
   </script>
 </body>
