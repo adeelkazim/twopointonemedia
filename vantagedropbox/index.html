@@ -35,10 +35,12 @@
     }
     a { color: inherit; }
     .shell { min-height: 100vh; background:
-      linear-gradient(180deg, rgba(5,6,8,.45), rgba(5,6,8,.98) 70%),
-      url('assets/vantage_banner.jpg') center 18% / cover no-repeat,
-      #050608;
+      linear-gradient(180deg, rgba(0,0,0,.24), rgba(0,0,0,.24)),
+      url('assets/vantage-motors-logo-trimmed.png') center 100px / min(860px, 92vw) auto no-repeat,
+      #000;
     }
+    /* Reserve a clear background-logo band: complete car and wordmark at every width. */
+    .shell .hero { padding-top: clamp(180px, 36vw, 330px); }
     /* Main website header: scoped styles preserve the Vantage page design. */
     .shell { padding-top: 76px; }
     .nav {
