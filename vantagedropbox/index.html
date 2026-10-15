@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <meta name="referrer" content="no-referrer" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vantage Motors | Upload Footage</title>
+  <meta name="description" content="Upload 4K mobile footage for Vantage Motors to Two Point One Media." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050608;
+      --panel: #0d1016;
+      --panel-2: #111722;
+      --text: #ffffff;
+      --muted: #a7afbd;
+      --line: rgba(255,255,255,.16);
+      --blue: #1c69d4;
+      --blue-2: #0653b6;
+      --white: #ffffff;
+      --black: #111111;
+      --success: #34d399;
+      --warning: #fbbf24;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    a { color: inherit; }
+    .shell { min-height: 100vh; background:
+      linear-gradient(180deg, rgba(5,6,8,.45), rgba(5,6,8,.98) 70%),
+      url('assets/vantage_banner.jpg') center 18% / cover no-repeat,
+      #050608;
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px clamp(20px, 5vw, 72px);
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: rgba(5,6,8,.64);
+      backdrop-filter: blur(14px);
+      position: sticky; top: 0; z-index: 5;
+    }
+    .brand { display: flex; gap: 14px; align-items: center; text-transform: uppercase; letter-spacing: .08em; font-weight: 900; }
+    .mark { width: 48px; height: 48px; border: 1px solid rgba(255,255,255,.22); display: grid; place-items: center; background: #000; padding: 8px; }
+    .mark img { max-width: 100%; max-height: 100%; display: block; object-fit: contain; }
+    .nav span:last-child { color: var(--muted); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr);
+      gap: clamp(28px, 6vw, 78px);
+      padding: clamp(48px, 7vw, 96px) clamp(20px, 5vw, 72px) clamp(40px, 6vw, 72px);
+      align-items: center;
+    }
+    .eyebrow { color: var(--muted); text-transform: uppercase; letter-spacing: .18em; font-size: 12px; font-weight: 900; margin: 0 0 18px; }
+    h1 { font-size: clamp(42px, 7vw, 86px); line-height: .98; letter-spacing: -.055em; text-transform: uppercase; font-weight: 300; margin: 0 0 22px; max-width: 860px; }
+    .lead { font-size: clamp(17px, 2vw, 22px); color: #dce2ea; line-height: 1.35; max-width: 700px; margin: 0 0 30px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chip { border: 1px solid rgba(255,255,255,.20); color: #e7edf7; padding: 10px 12px; font-size: 13px; text-transform: uppercase; letter-spacing: .08em; font-weight: 800; background: rgba(255,255,255,.06); }
+    .uploader {
+      background: linear-gradient(180deg, rgba(17,23,34,.92), rgba(8,11,17,.96));
+      border: 1px solid rgba(255,255,255,.16);
+      box-shadow: 0 30px 90px rgba(0,0,0,.45);
+      padding: clamp(22px, 4vw, 34px);
+    }
+    .status.live { border-color: rgba(52,211,153,.35); color: #bbf7d0; background: rgba(52,211,153,.10); }
+    .status.live .dot { background: var(--success); }
+    .status { display: inline-flex; align-items: center; gap: 9px; border: 1px solid rgba(251,191,36,.35); color: #ffe3a3; background: rgba(251,191,36,.08); padding: 8px 10px; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; font-weight: 900; margin-bottom: 18px; }
+    .dot { width: 8px; height: 8px; background: var(--warning); border-radius: 99px; }
+    .uploader h2 { margin: 0 0 8px; font-size: 30px; font-weight: 400; letter-spacing: -.025em; }
+    .uploader p { color: var(--muted); line-height: 1.45; margin: 0 0 22px; }
+    .field { margin-bottom: 14px; }
+    label { display: block; color: #f4f7fb; font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
+    input, textarea, select {
+      width: 100%;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.18);
+      color: white;
+      padding: 13px 14px;
+      border-radius: 0;
+      outline: none;
+      font: inherit;
+    }
+    textarea { min-height: 88px; resize: vertical; }
+    .drop {
+      border: 1.5px dashed rgba(255,255,255,.32);
+      background: rgba(255,255,255,.045);
+      padding: 26px;
+      text-align: center;
+      margin: 18px 0;
+    }
+    .drop strong { display: block; font-size: 18px; margin-bottom: 6px; }
+    .drop small { color: var(--muted); line-height: 1.35; display: block; }
+    .button {
+      width: 100%;
+      display: flex; justify-content: center; align-items: center;
+      min-height: 54px;
+      background: var(--blue);
+      color: white;
+      border: 0;
+      border-radius: 0;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-size: 14px;
+      cursor: not-allowed;
+      opacity: .62;
+    }
+    .button.active { cursor: pointer; opacity: 1; }
+    .button.active:disabled { cursor: wait; opacity: .7; }
+    .selected { font-size: 12px; color: #d8dee9; margin: -8px 0 14px; line-height: 1.4; }
+    .progress { height: 8px; background: rgba(255,255,255,.10); margin-top: 14px; overflow: hidden; }
+    .progress > div { width: 0%; height: 100%; background: var(--blue); transition: width .25s ease; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 12px; line-height: 1.4; }
+    .section { background: #fff; color: #17202b; padding: clamp(44px, 7vw, 88px) clamp(20px, 5vw, 72px); }
+    .grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(28px, 5vw, 72px); align-items: start; }
+    .section h2 { margin: 0 0 14px; font-size: clamp(32px, 4.8vw, 54px); line-height: 1; letter-spacing: -.045em; font-weight: 400; text-transform: uppercase; }
+    .section p { color: #5d6673; line-height: 1.45; font-size: 17px; margin: 0; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #d8dde5; border: 1px solid #d8dde5; }
+    .step { background: #fff; padding: 24px; min-height: 180px; }
+    .num { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--blue); font-weight: 900; font-size: 13px; margin-bottom: 34px; }
+    .step h3 { margin: 0 0 8px; font-size: 20px; letter-spacing: -.02em; }
+    .step p { font-size: 15px; }
+    .dark { background: #07090d; color: white; padding: clamp(44px, 7vw, 88px) clamp(20px, 5vw, 72px); }
+    .dark .inner { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.14); }
+    .spec { background: #0d1118; padding: 22px; }
+    .spec b { display: block; color: white; margin-bottom: 8px; font-size: 14px; text-transform: uppercase; letter-spacing: .08em; }
+    .spec span { color: var(--muted); font-size: 14px; line-height: 1.35; display: block; }
+    .footer { color: #aab2bf; padding: 24px clamp(20px, 5vw, 72px); border-top: 1px solid rgba(255,255,255,.12); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 13px; }
+    input:disabled, textarea:disabled { opacity: .65; cursor: not-allowed; }
+    .drop { cursor: not-allowed; }
+    @media (max-width: 540px) {
+      .nav { align-items: flex-start; gap: 14px; flex-direction: column; }
+      .brand { font-size: 14px; }
+      .hero > *, .uploader { min-width: 0; }
+    }
+    @media (max-width: 920px) {
+      .hero, .grid { grid-template-columns: 1fr; }
+      .steps, .dark .inner { grid-template-columns: 1fr; }
+      h1 { font-size: clamp(42px, 12vw, 64px); }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <nav class="nav" aria-label="Main">
+      <div class="brand"><div class="mark"><img src="assets/two-point-one-logo-white.png" alt="Two Point One Media"></div><span>Vantage Motors</span></div>
+      <span>Footage Upload Portal</span>
+    </nav>
+
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Two Point One Media Intake</p>
+        <h1>Upload mobile footage for Vantage Motors.</h1>
+        <p class="lead">Send 4K clips directly from your phone so the Two Point One Media team can review, organize, and use them for edits, social cuts, and dashboard-backed content reporting.</p>
+        <div class="chips">
+          <span class="chip">4K video ready</span>
+          <span class="chip">Mobile first</span>
+          <span class="chip">5GB max per upload</span>
+          <span class="chip">Photo + video only</span>
+        </div>
+      </div>
+
+      <form class="uploader" id="uploadForm" aria-label="Footage upload form">
+        <div class="status" role="status"><span class="dot"></span> Uploads currently unavailable</div>
+        <h2>Send footage</h2>
+        <p>This page is ready to preview. Uploads are not enabled yet. Please contact Two Point One Media to arrange footage delivery.</p>
+
+        <div class="field">
+          <label for="folderName">Footage / photo folder name <span aria-hidden="true">*</span></label>
+          <input disabled id="folderName" name="folderName" placeholder="Example: McLaren 720S showroom shoot" required>
+        </div>
+        <div class="field">
+          <label for="name">Your name</label>
+          <input disabled id="name" name="name" placeholder="Ali / Vantage team">
+        </div>
+        <div class="field">
+          <label for="notes">Anything we should know?</label>
+          <textarea disabled id="notes" name="notes" placeholder="Tell us what the footage is for, which vehicle it features, or any priority clips."></textarea>
+        </div>
+
+        <label class="drop" for="files" id="dropZone">
+          <strong>Select photos or videos</strong>
+          <small>Max 5GB per file · Adobe-compatible photo/video files only · JPG, PNG, TIFF, HEIC, DNG/RAW, MP4, MOV, MXF and similar.</small>
+          <input disabled id="files" name="files" type="file" multiple accept="image/*,video/*,.dng,.raw,.cr2,.cr3,.nef,.arw,.mxf,.mts,.m2ts" hidden>
+        </label>
+        <div class="selected" id="selectedFiles">No files selected.</div>
+
+        <button class="button" id="uploadButton" type="submit" disabled aria-describedby="uploadStatus">Uploads unavailable</button>
+        <div class="progress" aria-live="polite"><div id="bar"></div></div>
+        <div class="note" id="uploadStatus">Uploads are disabled. No files or form details will be sent.</div>
+      </form>
+    </section>
+  </main>
+
+  <section class="section">
+    <div class="grid">
+      <div>
+        <h2>Built for quick dealership uploads.</h2>
+        <p>Vantage can open one link on a phone, select clips from the camera roll, add a note, and submit. Your team sees organized files in Google Drive instead of chasing WhatsApp videos, text-message compression, or scattered downloads.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="num">01</div><h3>Open the link</h3><p>No app install. Designed for Safari and Chrome on mobile.</p></div>
+        <div class="step"><div class="num">02</div><h3>Select 4K clips</h3><p>Planned support for large MP4/MOV files when uploads are enabled.</p></div>
+        <div class="step"><div class="num">03</div><h3>Team gets access</h3><p>Once enabled, files will reach your Google Drive folder for team review.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark">
+    <div class="inner">
+      <div class="spec"><b>Destination</b><span>Vantage Media Dropbox · upload connection pending.</span></div>
+      <div class="spec"><b>Security</b><span>Uploads are disabled while the secure connection is prepared.</span></div>
+      <div class="spec"><b>Limits</b><span>5GB max per upload. Accept Adobe Creative Cloud-compatible photo/video files only.</span></div>
+      <div class="spec"><b>Approval needed</b><span>A secure upload connection is required before files can be sent.</span></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>Two Point One Media</span>
+    <span>Uploads currently unavailable</span>
+  </footer>
+
+  <script src="config.js" defer></script>
+  <script src="upload.js" defer></script>
+
+</body>
+</html>
