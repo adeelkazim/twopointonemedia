@@ -833,9 +833,18 @@
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.12);
       color: var(--muted);
-      transition: transform .2s ease, color .2s ease;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1;
+      transition: transform .2s ease, color .2s ease, border-color .2s ease, background .2s ease;
     }
-    details[open] .chevron { transform: none; color: var(--ink); }
+    .chevron::before { content: "+"; }
+    details[open] > summary > .chevron {
+      color: var(--ink);
+      border-color: rgba(51,214,255,.45);
+      background: rgba(51,214,255,.10);
+    }
+    details[open] > summary > .chevron::before { content: "\00d7"; }
 
     .section-body {
       border-top: 1px solid rgba(255,255,255,.08);
@@ -1031,7 +1040,7 @@
               <h3>Highlight Edits</h3>
               <p>Recap cuts, short teasers, and polished event moments for quick viewing and internal sharing.</p>
             </span>
-            <span class="chevron" aria-hidden="true">+</span>
+            <span class="chevron" aria-hidden="true"></span>
           </summary>
           <div class="section-body">
             <div class="video-list" aria-label="Highlight edit videos">
@@ -1041,7 +1050,7 @@
                     <h4>HP Edge AI NDE — Final Cut</h4>
                     <p>Featured highlight edit from the HP Hackathon Videos folder.</p>
                   </span>
-                  <span class="chevron" aria-hidden="true">+</span>
+                  <span class="chevron" aria-hidden="true"></span>
                 </summary>
                 <div class="video-item-body">
                   <video class="video-frame" controls preload="metadata" playsinline src="assets/hp-edge-ai-final-web.mp4"></video>
@@ -1052,32 +1061,14 @@
           </div>
         </details>
 
-        <details class="content-section" id="event-photos">
-          <summary>
-            <span class="section-number">02</span>
-            <span>
-              <h3>Event Photos</h3>
-              <p>Curated stills from the hackathon, team activity, speakers, judging, venue moments, and awards.</p>
-            </span>
-            <span class="chevron" aria-hidden="true">+</span>
-          </summary>
-          <div class="section-body">
-            <div class="photo-gallery-intro">
-              <p>Browse the selected event photos and the newly added AI Images from Drive. Tap any image to open the full gallery viewer.</p>
-              <span class="photo-count-badge">21 photos</span>
-            </div>
-            <div class="photo-gallery-grid enhanced" id="photo-gallery-grid" aria-label="Selected HP Hackathon event and AI images"></div>
-          </div>
-        </details>
-
         <details class="content-section" id="vertical-content">
           <summary>
-            <span class="section-number">03</span>
+            <span class="section-number">02</span>
             <span>
               <h3>Vertical Content <small>(Stories / Reels)</small></h3>
               <p>9:16 social-first clips for stories, reels, TikTok, LinkedIn vertical, and internal comms.</p>
             </span>
-            <span class="chevron" aria-hidden="true">+</span>
+            <span class="chevron" aria-hidden="true"></span>
           </summary>
           <div class="section-body">
             <div class="pending-panel">
@@ -1092,21 +1083,47 @@
 
         <details class="content-section" id="long-form-videos">
           <summary>
-            <span class="section-number">04</span>
+            <span class="section-number">03</span>
             <span>
               <h3>Long Form Videos</h3>
-              <p>Full-length event videos, speaker segments, ceremonies, interviews, or keynote recordings.</p>
+              <p>Full-length event videos, speaker segments, ceremonies, interviews, or keynote recordings. The Daniel Gohl interview is now available below.</p>
             </span>
-            <span class="chevron" aria-hidden="true">+</span>
+            <span class="chevron" aria-hidden="true"></span>
           </summary>
           <div class="section-body">
-            <div class="pending-panel">
-              <div>
-                <h4>Upload pending</h4>
-                <p>Long-form videos will appear here after upload. Recommended layout: title, runtime, description, embedded player, and download link.</p>
-              </div>
-              <span class="upload-badge">Upload pending</span>
+            <div class="video-list" aria-label="Long form videos">
+              <details class="video-item">
+                <summary>
+                  <span>
+                    <h4>Daniel Gohl — Full Interview</h4>
+                    <p>Full-length sit-down interview from the HP Edge AI SJSUHack event. Runtime 4:10.</p>
+                  </span>
+                  <span class="chevron" aria-hidden="true"></span>
+                </summary>
+                <div class="video-item-body">
+                  <video class="video-frame" controls preload="metadata" playsinline src="assets/daniel-gohl-interview-web.mp4"></video>
+                  <a class="drive-link" href="https://drive.google.com/file/d/1vBuPEgMd56JHRsEQg07rMThoVrTnWIJT/view" target="_blank" rel="noopener noreferrer">Open full quality video in Google Drive</a>
+                </div>
+              </details>
             </div>
+          </div>
+        </details>
+
+        <details class="content-section" id="event-photos">
+          <summary>
+            <span class="section-number">04</span>
+            <span>
+              <h3>Event Photos</h3>
+              <p>Curated stills from the hackathon, team activity, speakers, judging, venue moments, and awards.</p>
+            </span>
+            <span class="chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="section-body">
+            <div class="photo-gallery-intro">
+              <p>Browse the selected event photos and the newly added AI Images from Drive. Tap any image to open the full gallery viewer.</p>
+              <span class="photo-count-badge">21 photos</span>
+            </div>
+            <div class="photo-gallery-grid enhanced" id="photo-gallery-grid" aria-label="Selected HP Hackathon event and AI images"></div>
           </div>
         </details>
       </div>
