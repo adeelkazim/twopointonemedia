@@ -39,18 +39,64 @@
       url('assets/vantage_banner.jpg') center 18% / cover no-repeat,
       #050608;
     }
+    /* Main website header: scoped styles preserve the Vantage page design. */
+    .shell { padding-top: 76px; }
     .nav {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 22px clamp(20px, 5vw, 72px);
-      border-bottom: 1px solid rgba(255,255,255,.10);
-      background: rgba(5,6,8,.64);
-      backdrop-filter: blur(14px);
-      position: sticky; top: 0; z-index: 5;
+      position: fixed; top: 0; left: 0; width: 100%; height: 76px;
+      z-index: 1000; display: flex; align-items: center;
+      background: rgba(5,6,8,.42); backdrop-filter: blur(16px);
+      transition: background-color .3s ease, box-shadow .3s ease;
     }
-    .brand { display: flex; gap: 14px; align-items: center; text-transform: uppercase; letter-spacing: .08em; font-weight: 900; }
-    .mark { width: 48px; height: 48px; border: 1px solid rgba(255,255,255,.22); display: grid; place-items: center; background: #000; padding: 8px; }
-    .mark img { max-width: 100%; max-height: 100%; display: block; object-fit: contain; }
-    .nav span:last-child { color: var(--muted); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .nav.scrolled { background-color: #1e1d1e; box-shadow: 0 2px 20px rgba(0,0,0,.3); }
+    .nav .container {
+      width: min(1180px, calc(100% - 40px)); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo img { height: 40px; width: auto; display: block; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a {
+      font-size: 15px; font-weight: 500; letter-spacing: .5px;
+      text-transform: uppercase; color: #f2f2f2; text-decoration: none;
+      transition: color .2s ease; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 2px; background-color: #79c35f; transition: width .3s ease;
+    }
+    .nav-links a:hover { color: #79c35f; }
+    .nav-links a:hover::after { width: 100%; }
+    .menu-button {
+      display: none; flex-direction: column; gap: 5px; background: none;
+      border: none; cursor: pointer; padding: 8px; z-index: 1001;
+    }
+    .menu-button span {
+      display: block; width: 24px; height: 2px; background-color: #f2f2f2;
+      transition: all .3s ease;
+    }
+    .menu-button.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .menu-button.active span:nth-child(2) { opacity: 0; }
+    .menu-button.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    .fullscreen-menu {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100vh; height: 100dvh;
+      background-color: #1e1d1e; z-index: 999; display: flex;
+      flex-direction: column; align-items: center; justify-content: center; gap: 24px;
+      opacity: 0; visibility: hidden; transition: opacity .3s ease, visibility .3s ease;
+    }
+    .fullscreen-menu.active { opacity: 1; visibility: visible; }
+    .fullscreen-menu a {
+      font-size: 28px; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 2px; color: #f2f2f2; text-decoration: none; transition: color .2s ease;
+    }
+    .fullscreen-menu a:hover { color: #79c35f; }
+    .nav a:focus-visible, .menu-button:focus-visible, .fullscreen-menu a:focus-visible {
+      outline: 2px solid #79c35f; outline-offset: 6px;
+    }
+    @media (max-width: 860px) {
+      .nav { height: 64px; }
+      .shell { padding-top: 64px; }
+      .nav-links { display: none; }
+      .menu-button { display: flex; }
+    }
     .hero {
       display: grid;
       grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr);
@@ -136,8 +182,6 @@
     input:disabled, textarea:disabled { opacity: .65; cursor: not-allowed; }
     .drop { cursor: not-allowed; }
     @media (max-width: 540px) {
-      .nav { align-items: flex-start; gap: 14px; flex-direction: column; }
-      .brand { font-size: 14px; }
       .hero > *, .uploader { min-width: 0; }
     }
     @media (max-width: 920px) {
@@ -148,11 +192,31 @@
   </style>
 </head>
 <body>
+  <nav class="nav" aria-label="Primary navigation">
+    <div class="container">
+      <a href="../index.html" class="nav-logo" aria-label="Two Point One Media home">
+        <img src="../assets/67dafbf0__ICON_SVG.svg" alt="Two Point One Media" width="23" height="44">
+      </a>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../about.html">About</a>
+        <a href="../projects.html">Services</a>
+        <a href="../blog.html">Blog</a>
+        <a href="../contact.html">Contact</a>
+      </div>
+      <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="fullscreen-menu" id="site-mobile-menu" role="navigation" aria-label="Mobile menu" inert>
+    <a href="../index.html">Home</a>
+    <a href="../about.html">About</a>
+    <a href="../projects.html">Services</a>
+    <a href="../blog.html">Blog</a>
+    <a href="../contact.html">Contact</a>
+  </div>
   <main class="shell">
-    <nav class="nav" aria-label="Main">
-      <div class="brand"><div class="mark"><img src="assets/two-point-one-logo-white.png" alt="Two Point One Media"></div><span>Vantage Motors</span></div>
-      <span>Footage Upload Portal</span>
-    </nav>
 
     <section class="hero">
       <div>
@@ -227,6 +291,40 @@
     <span>Uploads currently unavailable</span>
   </footer>
 
+  <script>
+    (() => {
+      const nav = document.querySelector('.nav');
+      const button = nav.querySelector('.menu-button');
+      const menu = document.getElementById('site-mobile-menu');
+      const desktop = window.matchMedia('(min-width: 861px)');
+      const updateNav = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+      const setMenu = (open) => {
+        button.classList.toggle('active', open);
+        menu.classList.toggle('active', open);
+        button.setAttribute('aria-expanded', String(open));
+        button.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        menu.inert = !open;
+        document.body.style.overflow = open ? 'hidden' : '';
+      };
+      window.addEventListener('scroll', updateNav, { passive: true });
+      updateNav();
+      button.addEventListener('click', () => setMenu(button.getAttribute('aria-expanded') !== 'true'));
+      menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+      document.addEventListener('keydown', event => {
+        if (button.getAttribute('aria-expanded') !== 'true') return;
+        if (event.key === 'Escape') { setMenu(false); button.focus(); }
+        if (event.key === 'Tab') {
+          const links = [...menu.querySelectorAll('a')];
+          if (event.shiftKey && document.activeElement === button) {
+            event.preventDefault(); links.at(-1).focus();
+          } else if (!event.shiftKey && document.activeElement === links.at(-1)) {
+            event.preventDefault(); button.focus();
+          }
+        }
+      });
+      desktop.addEventListener('change', () => { if (desktop.matches) setMenu(false); });
+    })();
+  </script>
   <script src="config.js" defer></script>
   <script src="upload.js" defer></script>
 
