@@ -1498,7 +1498,16 @@
       if (event.key === 'ArrowRight') stepPhoto(1);
     });
 
-
+    // Stop any video inside a collapsing section so playback does not continue in the
+    // background after the user closes an accordion with the x control.
+    document.querySelectorAll('details').forEach((node) => {
+      node.addEventListener('toggle', () => {
+        if (node.open) return;
+        node.querySelectorAll('video').forEach((video) => {
+          if (!video.paused) video.pause();
+        });
+      });
+    });
   </script>
 </body>
 </html>
