@@ -599,7 +599,7 @@
     .pdf-modal {
       position: fixed;
       inset: 0;
-      z-index: 90;
+      z-index: 1100;
       display: none;
       place-items: center;
       padding: 24px;
@@ -610,8 +610,9 @@
     .pdf-frame {
       width: min(1040px, 100%);
       height: min(82vh, 860px);
+      height: min(82dvh, 860px);
       display: grid;
-      grid-template-rows: auto 1fr;
+      grid-template-rows: auto minmax(0, 1fr);
       overflow: hidden;
       border-radius: 22px;
       border: 1px solid rgba(255,255,255,.16);
@@ -648,8 +649,11 @@
     .brief-viewer {
       min-height: 0;
       overflow: auto;
+      overscroll-behavior: contain;
       display: grid;
       place-items: start center;
+      align-content: start;
+      gap: 16px;
       padding: 16px;
       background: #02070d;
       -webkit-overflow-scrolling: touch;
@@ -662,18 +666,7 @@
       background: white;
       box-shadow: 0 18px 50px rgba(0,0,0,.38);
     }
-    .brief-page-controls {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .brief-page-count {
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 850;
-      min-width: 86px;
-      text-align: center;
-    }
+
 
 
     .photo-gallery-grid.enhanced {
@@ -996,7 +989,10 @@
       .lightbox-bar { align-items: flex-start; }
       .hero-gif-card { max-width: 351px; }
       .pdf-modal { padding: 0; align-items: stretch; justify-items: stretch; }
-      .pdf-frame { width: 100%; height: 100dvh; max-height: 100dvh; border-radius: 0; border: 0; }
+      .pdf-frame {
+        width: 100%; height: 100vh; height: 100dvh; max-height: 100dvh; border-radius: 0; border: 0;
+        padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+      }
       .pdf-bar { align-items: flex-start; padding: 12px; flex-direction: column; gap: 10px; }
       .pdf-bar-actions { width: 100%; justify-content: space-between; flex-wrap: wrap; }
       .pdf-bar a, .pdf-bar button { min-height: 40px; padding: 0 12px; }
@@ -1240,17 +1236,14 @@
         <div class="pdf-bar">
           <span>HP Edge AI Pre-production Brief</span>
           <div class="pdf-bar-actions">
-            <div class="brief-page-controls" aria-label="Brief page controls">
-              <button type="button" id="brief-prev" aria-label="Previous brief page">Prev</button>
-              <span class="brief-page-count" id="brief-count">Page 1 / 3</span>
-              <button type="button" id="brief-next" aria-label="Next brief page">Next</button>
-            </div>
             <a href="assets/TwoPointOneMedia_EdgeAI_PreProduction_Brief.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
             <button type="button" id="brief-close" aria-label="Close pre-production brief">Close</button>
           </div>
         </div>
         <div class="brief-viewer" id="brief-viewer">
           <img class="brief-page-image" id="brief-page-image" src="assets/brief-pages/brief-page-01.jpg" alt="HP Edge AI Pre-production Brief page 1" width="1600" height="2071" loading="eager" />
+          <img class="brief-page-image" src="assets/brief-pages/brief-page-02.jpg" alt="HP Edge AI Pre-production Brief page 2" width="1600" height="2071" loading="eager" />
+          <img class="brief-page-image" src="assets/brief-pages/brief-page-03.jpg" alt="HP Edge AI Pre-production Brief page 3" width="1600" height="2071" loading="eager" />
         </div>
       </div>
     </div>
@@ -1321,46 +1314,27 @@
     const briefButton = document.getElementById('brief-button');
     const briefModal = document.getElementById('brief-modal');
     const briefClose = document.getElementById('brief-close');
-    const briefPrev = document.getElementById('brief-prev');
-    const briefNext = document.getElementById('brief-next');
-    const briefCount = document.getElementById('brief-count');
     const briefViewer = document.getElementById('brief-viewer');
-    const briefPageImage = document.getElementById('brief-page-image');
-    const briefPages = [
-      'assets/brief-pages/brief-page-01.jpg',
-      'assets/brief-pages/brief-page-02.jpg',
-      'assets/brief-pages/brief-page-03.jpg'
-    ];
-    let activeBriefPage = 0;
-    function showBriefPage(index) {
-      activeBriefPage = Math.max(0, Math.min(briefPages.length - 1, index));
-      if (briefPageImage) {
-        briefPageImage.src = briefPages[activeBriefPage];
-        briefPageImage.alt = `HP Edge AI Pre-production Brief page ${activeBriefPage + 1}`;
-      }
-      if (briefCount) briefCount.textContent = `Page ${activeBriefPage + 1} / ${briefPages.length}`;
-      if (briefPrev) briefPrev.disabled = activeBriefPage === 0;
-      if (briefNext) briefNext.disabled = activeBriefPage === briefPages.length - 1;
-      briefViewer?.scrollTo({ top: 0, behavior: 'instant' });
-    }
+    let briefBodyOverflow = '';
     function closeBriefModal() {
+      if (!briefModal?.classList.contains('active')) return;
       briefModal?.classList.remove('active');
       briefModal?.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
+      document.body.style.overflow = briefBodyOverflow;
     }
     briefButton?.addEventListener('click', () => {
-      showBriefPage(0);
+      if (briefModal?.classList.contains('active')) return;
+      briefBodyOverflow = document.body.style.overflow;
       briefModal?.classList.add('active');
       briefModal?.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
+      briefViewer?.scrollTo({ top: 0, behavior: 'instant' });
     });
-    briefPrev?.addEventListener('click', () => showBriefPage(activeBriefPage - 1));
-    briefNext?.addEventListener('click', () => showBriefPage(activeBriefPage + 1));
     briefClose?.addEventListener('click', closeBriefModal);
     briefModal?.addEventListener('click', (event) => {
       if (event.target === briefModal) closeBriefModal();
     });
-    showBriefPage(0);
+
 
 
     const eventPhotos = [
@@ -1593,11 +1567,7 @@
     });
     window.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') { document.getElementById('lightbox-close')?.click(); closeBriefModal(); }
-      if (briefModal?.classList.contains('active')) {
-        if (event.key === 'ArrowLeft') showBriefPage(activeBriefPage - 1);
-        if (event.key === 'ArrowRight') showBriefPage(activeBriefPage + 1);
-        return;
-      }
+      if (briefModal?.classList.contains('active')) return;
       if (!lightbox?.classList.contains('active')) return;
       if (event.key === 'ArrowLeft') stepPhoto(-1);
       if (event.key === 'ArrowRight') stepPhoto(1);
