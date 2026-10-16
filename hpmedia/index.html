@@ -478,6 +478,36 @@
       letter-spacing: .12em;
       font-weight: 900;
     }
+    .photo-status-badges {
+      display: flex;
+      flex: 0 0 auto;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .photo-status-badges .photo-count-badge {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 0;
+      white-space: nowrap;
+    }
+    .photo-upload-status {
+      display: inline-flex;
+      align-items: center;
+      color: #facc15;
+      background: rgba(250,204,21,.10);
+      border: 1px solid rgba(250,204,21,.35);
+      border-radius: 999px;
+      padding: 9px 10px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+    @media (max-width: 680px) {
+      .photo-status-badges { margin-top: 12px; }
+    }
     .photo-gallery-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1169,7 +1199,10 @@
           <div class="section-body">
             <div class="photo-gallery-intro">
               <p>Browse the selected event photos and the newly added AI Images from Drive. Tap any image to open the full gallery viewer.</p>
-              <span class="photo-count-badge">21 photos</span>
+              <div class="photo-status-badges" aria-label="Photo library status">
+                <span class="photo-count-badge">21 photos</span>
+                <span class="photo-upload-status">uploads in progress</span>
+              </div>
             </div>
             <div class="photo-gallery-grid enhanced" id="photo-gallery-grid" aria-label="Selected HP Hackathon event and AI images"></div>
           </div>
