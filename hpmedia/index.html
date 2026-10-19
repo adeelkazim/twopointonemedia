@@ -441,6 +441,12 @@
       display: block;
       object-fit: contain;
     }
+    .video-frame.video-frame-portrait {
+      width: min(100%, 360px);
+      aspect-ratio: 9 / 16;
+      object-fit: contain;
+      margin-inline: auto;
+    }
     .drive-link {
       display: inline-flex;
       align-items: center;
@@ -1097,13 +1103,18 @@
           </summary>
           <div class="section-body">
             <div class="video-list">
-              <div class="pending-panel">
-                <div>
-                  <h4>Vertical video 01</h4>
-                  <p>Vertical exports will appear here once uploaded.</p>
+              <details class="video-item">
+                <summary>
+                  <span>
+                    <h4>HP EdgeAI Hackathon Vertical Edit</h4>
+                    <p>Runtime 0:31.</p>
+                  </span>
+                  <span class="chevron" aria-hidden="true"></span>
+                </summary>
+                <div class="video-item-body">
+                  <video class="video-frame video-frame-portrait" controls preload="metadata" playsinline src="assets/hp-edgeai-hackathon-vertical-edit-web.mp4"></video>
                 </div>
-                <span class="upload-badge">Upload pending</span>
-              </div>
+              </details>
               <div class="pending-panel">
                 <div>
                   <h4>Vertical video 02</h4>
