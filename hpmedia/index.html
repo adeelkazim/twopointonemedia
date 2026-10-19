@@ -916,6 +916,28 @@
     }
 
 
+    .upload-status {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-self: start;
+      gap: 8px;
+    }
+    .upload-progress {
+      display: block;
+      width: 120px;
+      height: 8px;
+      margin-bottom: 8px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: var(--bg-2);
+    }
+    .upload-status .upload-progress { margin-bottom: 0; }
+    .upload-progress img { display: block; width: 120px; height: 8px; }
+    @media (prefers-reduced-motion: reduce) {
+      .upload-progress img { display: none; }
+    }
+
     .site-footer {
       margin-top: 80px;
       padding: 46px 0 34px;
@@ -1060,7 +1082,7 @@
     <section id="content-library" aria-labelledby="content-title">
       <div class="section-title">
         <h2 id="content-title">Content library</h2>
-        <p>Each section can expand or collapse. Placeholder panels are marked upload pending until the final media files are added.</p>
+        <p>Each section can expand or collapse. Placeholder panels are marked Upload in Progress until the final media files are added.</p>
       </div>
 
       <div class="accordion-grid">
@@ -1120,7 +1142,7 @@
                   <h4>Vertical video 02</h4>
                   <p>Vertical exports will appear here once uploaded.</p>
                 </div>
-                <span class="upload-badge">Upload pending</span>
+                <span class="upload-status"><span class="upload-badge">Upload in Progress</span><span class="upload-progress" aria-hidden="true"><img src="assets/upload-in-progress.gif" alt="" width="120" height="8" /></span></span>
               </div>
             </div>
           </div>
@@ -1153,7 +1175,7 @@
                 <div>
                   <h4>Daniel Gohl — Keynote</h4>
                 </div>
-                <span class="upload-badge">Upload pending</span>
+                <span class="upload-status"><span class="upload-badge">Upload in Progress</span><span class="upload-progress" aria-hidden="true"><img src="assets/upload-in-progress.gif" alt="" width="120" height="8" /></span></span>
               </div>
             </div>
           </div>
@@ -1171,10 +1193,11 @@
           <div class="section-body">
             <div class="pending-panel">
               <div>
-                <h4>Upload pending</h4>
+                <h4>Upload in Progress</h4>
+                <span class="upload-progress" aria-hidden="true"><img src="assets/upload-in-progress.gif" alt="" width="120" height="8" /></span>
                 <p>The documentary short will appear here once uploaded.</p>
               </div>
-              <span class="upload-badge">Upload pending</span>
+              <span class="upload-status"><span class="upload-badge">Upload in Progress</span><span class="upload-progress" aria-hidden="true"><img src="assets/upload-in-progress.gif" alt="" width="120" height="8" /></span></span>
             </div>
           </div>
         </details>
