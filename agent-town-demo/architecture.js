@@ -3,15 +3,18 @@
 export function paintArchitecture(ctx,p){
  const n=p.building,x=Math.round(p.x/2),y=Math.round(p.y/2);
  if(n===2)return false;
- const palettes={access:['#304e50','#617e70','#a5b69a','#87eac7'],agents:['#294d58','#4c7c83','#98b8ac','#83e8d4'],centre:['#294c53','#4b7c7c','#88b2a4','#72f4d5'],workshop:['#484652','#766771','#aa8d77','#ffcd85'],mind:['#393e5a','#606780','#969ab0','#bba2fa'],cloud:['#34465c','#617993','#a7bcc4','#8ee4f2'],control:['#484950','#797866','#b8a77c','#ffdb8d']};
- const [dark,wall,edge,neon]=palettes[p.quarter],ink='#23363e',brass='#bb9160',gold='#eed09a',glass='#315d69';
- const r=(a,b,w,h,c)=>{ctx.fillStyle=c;ctx.fillRect(x+a,y+b,w,h);};
+ // Deliberate material values: pale limestone archives, charcoal workshops,
+ // silver docks. Windows are white porcelain; no glow or colored overlay.
+ const palettes={access:['#555555','#aaaaaa','#dddddd','#f4f4f4'],agents:['#444444','#888888','#cccccc','#eeeeee'],centre:['#333333','#777777','#cccccc','#ffffff'],workshop:['#333333','#666666','#aaaaaa','#eeeeee'],mind:['#777777','#bbbbbb','#eeeeee','#ffffff'],cloud:['#555555','#999999','#dddddd','#ffffff'],control:['#333333','#777777','#bbbbbb','#eeeeee']};
+ const [dark,wall,edge,neon]=palettes[p.quarter],ink='#292929',brass='#999999',gold='#dddddd',glass='#444444';
+ const materials={'#1b3039':'#333333','#70878a':'#888888','#d8c495':'#cccccc','#e9f4cf':'#ffffff','#555e59':'#888888','#293e40':'#888888','#bcffe2':'#eeeeee','#ecffe0':'#ffffff','#e5c698':'#dddddd','#dbf9ee':'#eeeeee','#8fa7dd':'#bbbbbb','#d6fff0':'#ffffff','#f3e7b5':'#eeeeee','#d6ac7b':'#aaaaaa','#9cbeac':'#cccccc','#b7a7d4':'#eeeeee','#467965':'#555555','#82ac7d':'#999999'};
+ const r=(a,b,w,h,c)=>{ctx.fillStyle=materials[c]||c;ctx.fillRect(x+a,y+b,w,h);};
  const plate=(a,b,w,h,c=wall)=>{
   r(a,b,w,h,ink);r(a+2,b+2,w-4,h-4,c);r(a+2,b+2,w-4,1,edge);
   // Lit left bevel, dark return wall and sparse scratched panels give raster depth.
   if(w>=9&&h>=10){
    r(a+2,b+3,1,h-5,brass);r(a+w-5,b+3,3,h-5,'#1b3039');r(a+3,b+h-4,w-8,2,dark);
-   for(let row=b+7;row<b+h-5;row+=7)for(let col=a+6;col<a+w-6;col+=9){
+   for(let row=b+8;row<b+h-5;row+=12)for(let col=a+8;col<a+w-6;col+=17){
     const hash=Math.abs(col*13+row*7+n*3);r(col,row,2+hash%3,1,hash%3?'#70878a':edge);
     if(hash%4===0)r(col+1,row+1,1,2,dark);
    }
