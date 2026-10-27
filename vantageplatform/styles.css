@@ -8,7 +8,8 @@
 /* Authentic Vantage Motors asset; preserve intrinsic proportions at every size. */
 .sidebar .brand{margin:0 -5px 32px;display:block;background:#000}
 .vantage-logo{display:block;width:100%;height:auto;object-fit:contain}
+.sidebar .brand .vantage-logo{width:60%;margin-inline:auto}
 .mobile-brand{display:none}
 @media(max-width:1190px) and (min-width:901px){.sidebar .brand{margin-left:0;margin-right:0}}
-@media(max-width:900px){.sidebar .brand{display:none}.mobile-brand{display:flex;align-items:center;min-height:72px;padding:7px 17px;background:#000}.mobile-brand .vantage-logo{width:190px;max-width:100%}}
+@media(max-width:900px){.sidebar .brand{display:none}.mobile-brand{display:flex;align-items:center;justify-content:center;min-height:72px;padding:7px 17px;background:#000}.mobile-brand .vantage-logo{width:114px;max-width:100%}}
 @media(max-width:600px){.sidebar{display:none}.app-shell{padding-top:0}.mobile-brand{min-height:72px}}
