@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="description" content="Vantage vehicle inventory workspace. Interactive first draft with synthetic demo data, manual stage tracking and browser-local storage."><meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; media-src blob:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<link rel="stylesheet" href="live.css"><script type="module" src="workspace.js"></script><title>Vantage | Demo workspace</title><link rel="icon" href="data:,"><link rel="stylesheet" href="styles.css"><script type="module" src="app.js"></script>
+</head>
+<body>
+<noscript><p style="padding:20px;background:#fff0dc;color:#503b15">JavaScript is required for this interactive inventory demo. Enable JavaScript to view synthetic vehicles and try the workflow. No live inventory system is connected.</p></noscript>
+<a class="skip" href="#main">Skip to inventory</a>
+<aside class="sidebar">
+ <div class="brand"><span class="brand-mark">V<span>∕</span></span><div>VANTAGE<small>MOTORS · OPERATIONS</small></div></div>
+ <div class="workspace-label">WORKSPACE</div>
+ <nav aria-label="Main"><button class="nav-item active" id="navInventory"><span>▦</span> Inventory <span class="nav-count" id="navCount">16</span></button><button class="nav-item" id="navPipeline"><span>▤</span> Pipeline</button><button class="nav-item" id="navNotifications"><span>♧</span> Notifications <span class="notification-dot"></span></button></nav>
+ <div class="sidebar-bottom"><div class="demo-card"><span class="demo-light"></span> Interactive first draft<p>Synthetic data. Your changes stay in this browser only.</p><button id="guide">About this demo ↗</button></div><button class="profile" id="reset"><span class="avatar">VD</span><span>Vantage demo<small>Reset demo data ↺</small></span></button></div>
+</aside>
+<div class="app-shell">
+<header class="topbar"><div><span class="crumb">Workspace</span><span class="slash">/</span> Vehicle inventory</div><div class="top-actions"><span class="local-badge"><i></i> Local demo</span><button id="guideTop" aria-label="About this demo" title="About this demo">ⓘ</button><button id="resetTop" aria-label="Reset demo" title="Reset demo">↺</button><button id="notifications" aria-label="Open notifications">♧ <span id="notificationCount">1</span></button><span class="avatar">VD</span></div></header>
+<main id="main">
+ <div class="page-heading"><div><div class="eyebrow">YOUR INVENTORY. EVERY STEP.</div><h1>Vehicle inventory<span class="red-dot">.</span></h1><p>From first purchase to final handover. Keep every unit moving.</p></div><button class="primary" id="addVehicle">＋ Add vehicle</button></div>
+ <section class="demo-workspace-switch" aria-label="Workspace selector"><label for="workspaceMode">WORKSPACE</label><select id="workspaceMode"><option value="index.html">Live inventory · Read-only</option><option value="demo.html" selected>Demo workspace · Synthetic</option></select><p>Synthetic workflow only. Demo changes never affect dealer inventory.</p></section>
+ <section class="metrics" aria-label="Inventory summary" id="metrics"></section>
+ <section class="pipeline-section" aria-label="Filter by stage"><div class="section-label"><span>INVENTORY PIPELINE</span><span>Purchase to handover <span aria-hidden="true">↗</span></span></div><div id="pipeline" class="pipeline"></div></section>
+ <section class="inventory-panel" id="inventory" aria-label="Vehicle inventory">
+ <div class="inventory-heading"><div><h2>All vehicles <span id="resultCount" class="count"></span></h2><p id="filterDescription">Your complete inventory, in one place.</p></div><div class="segmented" aria-label="Inventory layout"><button id="tableView" aria-pressed="true">☷ <span>Table</span></button><button id="boardView" aria-pressed="false">▤ <span>Board</span></button></div></div>
+ <div class="toolbar"><label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search stock, VIN, make or model…" aria-label="Search vehicles"><kbd>/</kbd></label><label class="sr-only" for="stageFilter">Stage</label><select id="stageFilter"><option value="">All stages</option></select><button id="aging" aria-pressed="false">◷ Aging 21+ days</button><button id="clearFilters" class="text-button">Clear</button></div>
+ <div id="vehicleList"></div><div class="table-footer"><span id="showing"></span><span><i class="live-dot"></i> Saved locally · Demo data only</span></div>
+ </section>
+ <div class="bottom-note"><span>VANTAGE <span class="muted">/ OPERATIONS WORKSPACE</span></span><span>First draft · Built around your workflow</span></div>
+</main>
+</div>
+<dialog id="detailDialog" class="detail-dialog" aria-labelledby="detailTitle"><div id="detailContent"></div></dialog>
+<dialog id="formDialog" class="form-dialog" aria-labelledby="formTitle"><div id="formContent"></div></dialog>
+<dialog id="notificationDialog" class="notification-dialog" aria-labelledby="notificationTitle"><div class="dialog-top"><div><div class="eyebrow">TEAM ACTIVITY</div><h2 id="notificationTitle">Notifications</h2></div><button data-close aria-label="Close notifications">×</button></div><p class="notice">Demo team feed only. No email, push or multiuser delivery.</p><div id="notificationList"></div></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+</body></html>
