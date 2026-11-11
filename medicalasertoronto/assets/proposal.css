@@ -1,0 +1,23 @@
+.sample-carousel{max-width:540px;margin-inline:auto}
+.samples{display:flex;gap:0;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:thin}
+.sample{flex:0 0 100%;min-width:0;scroll-snap-align:start;scroll-snap-stop:always;padding:6px}
+.sample video{width:min(100%,34.875svh,360px);height:auto;max-height:none;object-fit:contain}
+.sample figcaption{min-height:44px;padding-top:10px;margin:0;text-align:center;max-width:none}
+.sample-controls{display:flex;align-items:center;justify-content:center;gap:24px;margin-top:14px}
+.sample-controls button{width:48px;height:48px;border:1px solid var(--forest);background:var(--forest);color:var(--paper);font:24px/1 var(--sans);border-radius:2px;cursor:pointer}
+.sample-controls button:disabled{opacity:.35;cursor:default}
+.sample-controls button:focus-visible,.samples:focus-visible{outline:3px solid #8c4c26;outline-offset:3px}
+.sample-position{min-width:52px;text-align:center;font-size:14px}
+.swipe-hint{text-align:center;margin-bottom:0}
+.hero > div > .button{display:flex;width:fit-content;margin-inline:auto}
+.workstream{display:block;padding:0}
+.workstream summary{display:grid;grid-template-columns:36px 1fr 24px;gap:24px;align-items:center;min-height:72px;padding:18px 0;cursor:pointer;list-style:none}
+.workstream summary::-webkit-details-marker{display:none}
+.workstream summary h3{margin:0}
+.workstream .number{padding:0}
+.workstream summary:focus-visible{outline:3px solid #8c4c26;outline-offset:3px}
+.toggle-mark{font:28px/1 var(--sans);text-align:center}
+.toggle-mark::before{content:'+'}
+.workstream[open] .toggle-mark::before{content:'×'}
+.workstream > p{margin:0 48px 24px 60px;max-width:740px}
+@media(max-width:640px){.workstream summary{grid-template-columns:24px 1fr 24px;gap:12px}.workstream > p{margin:0 36px 24px}.workstream summary h3{font-size:25px}}
